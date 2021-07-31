@@ -7,7 +7,6 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 // images
 import bgImage from "assets/images/login-bg.jpeg";
-import bgImageBlur from "assets/images/login-bg-blur.jpeg";
 import logo from "assets/images/logo.png";
 
 // hooks

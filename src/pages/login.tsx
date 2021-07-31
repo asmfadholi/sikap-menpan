@@ -5,7 +5,7 @@ import Login from "components/Login";
 
 function Index() {
 	return (
-		<Page title="Home" description="Hello world">
+		<Page title="Login" description="Menpan">
 			<Login />
 		</Page>
 	);

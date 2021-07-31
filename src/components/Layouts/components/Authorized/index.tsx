@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Menu, Button, Modal, message, Row, Col } from "antd";
+import NProgress from "nprogress";
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
@@ -31,8 +32,8 @@ const generateMenu = ({ name, key, icon: Icon }: generateMenuInterface) => {
 	);
 };
 
-const Authorized = ({ children, setLoading }) => {
-	const { replace, push, pathname } = useRouter();
+const Authorized = ({ children }) => {
+	const { replace, push, pathname, events } = useRouter();
 	const { dispatch } = useAuthStates();
 	const [collapse, setCollapse] = useState(false);
 	const [selectedKeys, setSelectedKeys] = useState([]);
@@ -51,12 +52,10 @@ const Authorized = ({ children, setLoading }) => {
 				dispatch({ type: "logout" });
 				replace("/login");
 				resolve(true);
-				setLoading(true);
-				localStorage.removeItem("auth");
-
-				setTimeout(() => {
-					setLoading(false);
-				}, 700);
+				events.on("routeChangeComplete", () => {
+					NProgress.done();
+					localStorage.removeItem("auth");
+				});
 			}, 1000);
 		});
 		message.success("Berhasil Keluar");

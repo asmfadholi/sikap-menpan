@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import NProgress from "nprogress";
 
 import { Form, Input, Button, Row, Col, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -21,22 +22,21 @@ import {
 } from "./styles";
 
 const Login = () => {
-	const { dispatch, setLoading: setLoadingAuth } = useAuthStates();
-	const { push } = useRouter();
+	const { dispatch } = useAuthStates();
+	const { push, events } = useRouter();
 	const [loading, setLoading] = useState(false);
 
 	const handleFinish = (res: { email: string; password: string }) => {
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
-			setLoadingAuth(true);
 			dispatch({ type: "login" });
 			message.success("Berhasil Login");
 			push("/");
-			localStorage.setItem("auth", JSON.stringify(res));
-			setTimeout(() => {
-				setLoadingAuth(false);
-			}, 1000);
+			events.on("routeChangeComplete", () => {
+				NProgress.done();
+				localStorage.setItem("auth", JSON.stringify(res));
+			});
 		}, 1000);
 	};
 

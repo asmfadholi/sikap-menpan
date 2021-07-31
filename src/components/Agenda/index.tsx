@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Button, Col, Table } from "antd";
 import { TableProps } from "antd/lib/table";
+import dynamic from "next/dynamic";
 
 // hooks
 import useAgendaList from "hooks/useAgendaList";
 
 // connfiguration
 import tableConfig from "./tableConfig";
+
+// components
+const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
 	const {
@@ -16,12 +20,19 @@ const TableDashboard = () => {
 		total,
 		page,
 	} = useAgendaList();
+	const [visibleModal, setVisibleModal] = useState(false);
+	const [isFirstModal, setIsFirstModal] = useState(true);
 	const config = tableConfig({ total, page });
 
 	const handleOnChange = (payload) => {
 		const { current = 1 } = payload;
 		const req = { page: current };
 		handleFilter(req);
+	};
+
+	const handleClickNew = () => {
+		setVisibleModal(true);
+		setIsFirstModal(false);
 	};
 
 	const propsDataTable = {
@@ -41,12 +52,22 @@ const TableDashboard = () => {
 					span={12}
 					style={{ display: "flex", justifyContent: "flex-end" }}
 				>
-					<Button type="primary" style={{ width: "240px" }}>
+					<Button
+						type="primary"
+						style={{ width: "240px" }}
+						onClick={handleClickNew}
+					>
 						Buat Agenda Baru
 					</Button>
 				</Col>
 			</Row>
 			<Table {...propsDataTable} />
+			{!isFirstModal && (
+				<CreationModal
+					visible={visibleModal}
+					setVisible={setVisibleModal}
+				/>
+			)}
 		</div>
 	);
 };

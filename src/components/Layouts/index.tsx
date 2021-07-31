@@ -11,7 +11,7 @@ import { styFlexCentered } from "./styles";
 
 const Layouts = ({ children }) => {
 	const authValidation = useAuthValidation();
-	const { loading, isLoggedIn, setLoading } = authValidation;
+	const { loading, isLoggedIn } = authValidation;
 
 	if (loading) {
 		return (
@@ -25,7 +25,7 @@ const Layouts = ({ children }) => {
 	}
 
 	if (!loading && isLoggedIn) {
-		return <Authorizhed setLoading={setLoading}>{children}</Authorizhed>;
+		return <Authorizhed>{children}</Authorizhed>;
 	}
 
 	if (!loading && !isLoggedIn) {

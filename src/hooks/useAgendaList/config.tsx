@@ -12,10 +12,11 @@ export const useDummyQuery = () => {
 		}, 1500);
 	}, []);
 
-	const refetch = () => {
+	const refetch = (data) => {
 		setLoading(true);
 		setTimeout(() => {
 			setLoading(false);
+			console.log(data);
 		}, 1500);
 	};
 

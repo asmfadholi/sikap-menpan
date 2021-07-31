@@ -1,13 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { setConfig, normalizer, useDummyQuery } from "./config";
 
 const useAgendaList = () => {
 	const [variables, setVariables] = useState({ page: 1 });
-	//   const { loading, data, refetch } = useQuery(GET_SHOP_CRITERIA, setConfig({ accessToken, sonicAccessToken }));
-	const { loading, data, refetch } = useDummyQuery(
-		"getCampaignList",
-		setConfig({ accessToken: "", sonicAccessToken: "" }, null),
-	);
+	const { loading, data, refetch } = useDummyQuery();
 
 	const handleFilter = async (req) => {
 		const combineReq = { ...variables, ...req };

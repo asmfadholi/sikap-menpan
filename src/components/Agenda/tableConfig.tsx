@@ -17,7 +17,6 @@ const tableConfig = ({ total = 100, page = 1 }) => {
 		{
 			title: "Name Agenda",
 			dataIndex: "name",
-			fixed: "left",
 			width: 300,
 			sorter: true,
 			key: "name",
@@ -37,7 +36,6 @@ const tableConfig = ({ total = 100, page = 1 }) => {
 		{
 			title: "Aksi",
 			dataIndex: "action",
-			fixed: "right",
 			width: 320,
 			key: "action",
 			render: () => <ActionCol />,

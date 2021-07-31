@@ -1,7 +1,4 @@
 import { css } from "@emotion/react";
-import { hexToRGBA } from "helpers/utils/hexToRGBA";
-import { pxToRem } from "helpers/utils/pxToRem";
-import bgImage from "assets/images/logo.png";
 
 export const stySideImage = css`
 	height: 100vh;

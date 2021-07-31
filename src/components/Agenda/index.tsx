@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Button, Col, Table } from "antd";
+import { TableProps } from "antd/lib/table";
 
 // hooks
 import useAgendaList from "hooks/useAgendaList";
@@ -27,7 +28,8 @@ const TableDashboard = () => {
 		loading,
 		dataSource,
 		onChange: handleOnChange,
-	};
+		...config,
+	} as TableProps<any>;
 
 	return (
 		<div style={{ minHeight: "100vh" }}>
@@ -44,7 +46,7 @@ const TableDashboard = () => {
 					</Button>
 				</Col>
 			</Row>
-			<Table {...config} {...propsDataTable} />
+			<Table {...propsDataTable} />
 		</div>
 	);
 };

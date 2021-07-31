@@ -20,7 +20,7 @@ export const stySideImage = css`
 		z-index: 2;
 		top: 0;
 		opacity: 0.5;
-		left: -8px;
+		left: 0px;
 	}
 `;
 

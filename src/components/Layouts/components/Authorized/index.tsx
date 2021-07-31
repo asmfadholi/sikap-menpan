@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-import { Layout, Menu, Button, Modal, message } from "antd";
+import React, { useEffect, useState } from "react";
+import { Layout, Menu, Button, Modal, message, Row, Col } from "antd";
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
-	AuditOutlined,
-	UserOutlined,
-	// VideoCameraOutlined,
-	// UploadOutlined,
 	LogoutOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
@@ -17,16 +13,37 @@ import { useAuthStates } from "contexts/Auth";
 // styles
 import { stySider, styLogout } from "./styles";
 
+import configMenu from "./configMenu";
+
 const { Header, Sider, Content } = Layout;
 
+interface generateMenuInterface {
+	name: string;
+	key: string;
+	icon: any;
+}
+
+const generateMenu = ({ name, key, icon: Icon }: generateMenuInterface) => {
+	return (
+		<Menu.Item key={key} icon={<Icon />}>
+			{name}
+		</Menu.Item>
+	);
+};
+
 const Authorized = ({ children, setLoading }) => {
-	const { replace, push } = useRouter();
+	const { replace, push, pathname } = useRouter();
 	const { dispatch } = useAuthStates();
 	const [collapse, setCollapse] = useState(false);
+	const [selectedKeys, setSelectedKeys] = useState([]);
 
 	const toggle = () => {
 		setCollapse((prev) => !prev);
 	};
+
+	useEffect(() => {
+		setSelectedKeys([pathname]);
+	}, [pathname]);
 
 	const doLogout = async () => {
 		const promise = await new Promise((resolve) => {
@@ -59,48 +76,65 @@ const Authorized = ({ children, setLoading }) => {
 
 	return (
 		<Layout css={stySider}>
-			<Sider trigger={null} collapsible collapsed={collapse}>
-				<div className="logo-sidebar" />
-				<Menu
-					theme="dark"
-					mode="inline"
-					defaultSelectedKeys={["/"]}
-					onSelect={handleSelect}
-				>
-					<Menu.Item key="/" icon={<UserOutlined />}>
-						Dashboard
-					</Menu.Item>
-					<Menu.Item key="/agenda" icon={<AuditOutlined />}>
-						Agenda
-					</Menu.Item>
-					{/* <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-						nav 2
-					</Menu.Item>
-					<Menu.Item key="3" icon={<UploadOutlined />}>
-						nav 3
-					</Menu.Item> */}
-				</Menu>
-			</Sider>
+			<Row>
+				<Col span={0} sm={24}>
+					<Sider
+						trigger={null}
+						collapsible
+						collapsed={collapse}
+						style={{ minHeight: "100vh", height: "100%" }}
+					>
+						<div className="logo-sidebar" />
+						<Menu
+							theme="dark"
+							mode="inline"
+							selectedKeys={selectedKeys}
+							onSelect={handleSelect}
+						>
+							{configMenu.map(generateMenu)}
+						</Menu>
+					</Sider>
+				</Col>
+			</Row>
+
 			<Layout className="site-layout">
 				<Header
 					className="site-layout-background"
 					style={{ padding: 0 }}
 				>
-					{React.createElement(
-						collapse ? MenuUnfoldOutlined : MenuFoldOutlined,
-						{
-							className: "trigger",
-							onClick: toggle,
-						},
-					)}
-					<Button
-						danger
-						type="link"
-						css={styLogout}
-						onClick={handleLogout}
-					>
-						Logout <LogoutOutlined />
-					</Button>
+					<Row>
+						<Col span={0} sm={12}>
+							{React.createElement(
+								collapse
+									? MenuUnfoldOutlined
+									: MenuFoldOutlined,
+								{
+									className: "trigger",
+									onClick: toggle,
+								},
+							)}
+						</Col>
+						<Col span={12} sm={0}>
+							<Menu
+								theme="light"
+								mode="horizontal"
+								selectedKeys={selectedKeys}
+								onSelect={handleSelect}
+							>
+								{configMenu.map(generateMenu)}
+							</Menu>
+						</Col>
+						<Col span={12}>
+							<Button
+								danger
+								type="link"
+								css={styLogout}
+								onClick={handleLogout}
+							>
+								Logout <LogoutOutlined />
+							</Button>
+						</Col>
+					</Row>
 				</Header>
 				<Content
 					className="site-layout-background"

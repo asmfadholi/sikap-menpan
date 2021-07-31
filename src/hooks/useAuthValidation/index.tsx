@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // hooks
 import { useAuthStates } from "contexts/Auth";
 
-const urlsIgnore = ['/login'];
+const urlsIgnore = ["/login"];
 
 const useAuthValidation = () => {
 	const { replace, events, pathname } = useRouter();

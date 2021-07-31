@@ -41,12 +41,12 @@ const Login = () => {
 	};
 
 	return (
-		<Row gutter={16}>
-			<Col span={16} css={stySideImage}>
+		<Row style={{ minHeight: "100vh" }}>
+			<Col span={0} sm={16} css={stySideImage}>
 				<Image src={bgImage} alt="" role="presentation" />
 				<div className="mask"></div>
 			</Col>
-			<Col span={8} css={styFormContainer}>
+			<Col span={24} sm={8} css={styFormContainer}>
 				<Form
 					name="normal_login"
 					className="login-form"

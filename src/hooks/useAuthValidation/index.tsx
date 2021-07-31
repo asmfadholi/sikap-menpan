@@ -4,8 +4,10 @@ import { useRouter } from "next/router";
 // hooks
 import { useAuthStates } from "contexts/Auth";
 
+const urlsIgnore = ['/login'];
+
 const useAuthValidation = () => {
-	const { replace, events } = useRouter();
+	const { replace, events, pathname } = useRouter();
 	const { isLoggedIn, dispatch, setLoading, loading } = useAuthStates();
 	const [isFirst, setIsFirst] = useState(true);
 
@@ -15,8 +17,10 @@ const useAuthValidation = () => {
 			events.on("routeChangeComplete", () => setLoading(false));
 			setTimeout(() => {
 				dispatch({ type: isLoggedInState ? "login" : "logout" });
-				if (!isLoggedInState) {
+				if (!isLoggedInState && !urlsIgnore.includes(pathname)) {
 					replace("/login");
+				} else if (isLoggedInState && urlsIgnore.includes(pathname)) {
+					replace("/");
 				} else {
 					setLoading(false);
 				}

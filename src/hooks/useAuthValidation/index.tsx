@@ -37,14 +37,17 @@ const useAuthValidation = () => {
 		};
 
 		events.on("routeChangeStart", handleRouteChange);
-		events.on("routeChangeComplete", () => NProgress.done());
+		events.on("routeChangeComplete", () => {
+			NProgress.done();
+			setLoading(false);
+		});
 		events.on("routeChangeError", () => NProgress.done());
 
 		return () => {
 			events.off("routeChangeStart", handleRouteChange);
 			events.off("routeChangeComplete", () => {
-				setLoading(false);
 				NProgress.done();
+				setLoading(false);
 			});
 			events.off("routeChangeError", () => NProgress.done());
 		};

@@ -16,3 +16,5 @@ notes.md
 .vercel
 out
 .eslintcache
+/public/sw.*
+/public/workbox-*

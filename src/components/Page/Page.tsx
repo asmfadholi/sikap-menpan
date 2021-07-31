@@ -27,6 +27,12 @@ const Page = ({
 			<meta name="twitter:title" content={title} />
 			<meta name="twitter:image" content={image} />
 			<link
+				rel="apple-touch-icon"
+				sizes="192x192"
+				href="/icons/icons-192x192.png"
+			/>
+			{/* <link rel="mask-icon" href={safariPinnedTab} color="#000" /> */}
+			<link
 				rel="icon"
 				type="image/png"
 				sizes="32x32"

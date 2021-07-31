@@ -7,6 +7,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 // images
 import bgImage from "assets/images/login-bg.jpeg";
+import bgImageBlur from "assets/images/login-bg-blur.jpeg";
 import logo from "assets/images/logo.png";
 
 // hooks
@@ -43,7 +44,12 @@ const Login = () => {
 	return (
 		<Row style={{ minHeight: "100vh" }}>
 			<Col span={0} sm={16} css={stySideImage}>
-				<Image src={bgImage} alt="" role="presentation" />
+				<Image
+					src={bgImage}
+					alt=""
+					role="presentation"
+					placeholder="blur"
+				/>
 				<div className="mask"></div>
 			</Col>
 			<Col span={24} sm={8} css={styFormContainer}>
@@ -63,7 +69,12 @@ const Login = () => {
 					size="large"
 				>
 					<div css={styLogo}>
-						<Image src={logo} alt="" role="presentation" />
+						<Image
+							src={logo}
+							alt=""
+							role="presentation"
+							placeholder="blur"
+						/>
 					</div>
 					<Form.Item
 						name="email"

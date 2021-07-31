@@ -17,7 +17,7 @@ function HeadComponent() {
 				crossOrigin="true"
 			/>
 			<link
-				rel="preload"
+				rel="prefetch"
 				as="style"
 				href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
 			/>

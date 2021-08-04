@@ -1,7 +1,7 @@
 import { Space, Spin } from "antd";
 
 //styles
-import { styFlexCentered } from './styles';
+import { styFlexCentered } from "./styles";
 
 function Loaders() {
 	return (

@@ -20,7 +20,7 @@ export const stySideImage = css`
 		z-index: 2;
 		top: 0;
 		opacity: 0.5;
-		left: 0px;
+		left: 0;
 	}
 `;
 
@@ -48,9 +48,9 @@ export const styLogo = css`
 export const styBanner = css`
 	position: absolute;
 	left: 0;
-	top: 0;
+	bottom: 0;
 	width: 100%;
-	height: 100vh;
+	height: auto;
 	div {
 		height: 100%;
 		width: 100%;

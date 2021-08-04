@@ -12,9 +12,9 @@ const theme = {
 		primary: "#b62b30",
 		primaryDark: "#aa2227",
 
-		secondaryLight: "#7DD3FC",
-		secondary: "#0EA5E9",
-		secondaryDark: "#075985",
+		secondaryLight: "#1a1919",
+		secondary: "#000000",
+		secondaryDark: "#000000",
 
 		tertiaryLight: "#D8B4FE",
 		tertiary: "#A855F7",

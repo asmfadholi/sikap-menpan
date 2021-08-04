@@ -11,6 +11,11 @@ export const stySider = (theme: any) => css`
 		transition: color 0.3s;
 	}
 
+	.ant-layout-sider,
+	.ant-menu-dark {
+		background: ${theme.colors.secondary};
+	}
+
 	.trigger:hover {
 		color: ${theme.colors.primary};
 	}

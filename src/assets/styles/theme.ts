@@ -8,9 +8,9 @@ const theme = {
 		gutterCol: { default: "10px", medium: "30px", big: "50px" },
 	},
 	colors: {
-		primaryLight: "#98C7FF",
-		primary: "#0370F3",
-		primaryDark: "#003A80",
+		primaryLight: "#c74247",
+		primary: "#b62b30",
+		primaryDark: "#aa2227",
 
 		secondaryLight: "#7DD3FC",
 		secondary: "#0EA5E9",

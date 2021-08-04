@@ -7,19 +7,15 @@ import { Form, Input, Button, Row, Col, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 // images
+import banner from "assets/images/banner.jpeg";
 import bgImage from "assets/images/login-bg.jpeg";
-import logo from "assets/images/logo.png";
+import logoVertical from "assets/images/logo-sikap-vertical.png";
 
 // hooks
 import { useAuthStates } from "contexts/Auth";
 
 // styles
-import {
-	stySideImage,
-	styFormContainer,
-	styLogo,
-	// styFlexCentered,
-} from "./styles";
+import { stySideImage, styFormContainer, styLogo, styBanner } from "./styles";
 
 const Login = () => {
 	const { dispatch } = useAuthStates();
@@ -42,14 +38,25 @@ const Login = () => {
 
 	return (
 		<Row style={{ minHeight: "100vh" }}>
-			<Col span={0} sm={16} css={stySideImage}>
-				<Image
-					src={bgImage}
-					alt=""
-					role="presentation"
-					placeholder="blur"
-				/>
-				<div className="mask"></div>
+			<Col span={0} sm={16}>
+				<div css={stySideImage}>
+					<Image
+						src={bgImage}
+						alt=""
+						role="presentation"
+						placeholder="blur"
+					/>
+					<div className="mask"></div>
+				</div>
+
+				<div css={styBanner}>
+					<Image
+						src={banner}
+						alt=""
+						role="presentation"
+						placeholder="blur"
+					/>
+				</div>
 			</Col>
 			<Col span={24} sm={8} css={styFormContainer}>
 				<Form
@@ -69,7 +76,7 @@ const Login = () => {
 				>
 					<div css={styLogo}>
 						<Image
-							src={logo}
+							src={logoVertical}
 							alt=""
 							role="presentation"
 							placeholder="blur"

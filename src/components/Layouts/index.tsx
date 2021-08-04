@@ -1,35 +1,26 @@
 import React from "react";
-import { Spin, Space } from "antd";
 import Authorizhed from "./components/Authorized";
-import Unauthorizhed from "./components/Unauthorized";
 
 // hooks
 import useAuthValidation from "hooks/useAuthValidation";
 
-// styles
-import { styFlexCentered } from "./styles";
+// components
+import Loaders from "components/Loaders";
 
-const Layouts = ({ children }) => {
+const Layouts = ({ children, auth }) => {
 	const authValidation = useAuthValidation();
-	const { loading, isLoggedIn } = authValidation;
+	const { loading } = authValidation;
 
 	if (loading) {
-		return (
-			<div css={styFlexCentered}>
-				<Space size={10} align="center" direction="vertical">
-					<Spin />
-					Mohon tunggu sebentar...
-				</Space>
-			</div>
-		);
+		return <Loaders />;
 	}
 
-	if (!loading && isLoggedIn) {
+	if (!loading && !auth) {
+		return children;
+	}
+
+	if (!loading && auth) {
 		return <Authorizhed>{children}</Authorizhed>;
-	}
-
-	if (!loading && !isLoggedIn) {
-		return <Unauthorizhed>{children}</Unauthorizhed>;
 	}
 };
 

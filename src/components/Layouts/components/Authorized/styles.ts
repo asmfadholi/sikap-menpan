@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { hexToRGBA } from "helpers/utils/hexToRGBA";
 import { pxToRem } from "helpers/utils/pxToRem";
 
 export const stySider = (theme: any) => css`
@@ -17,9 +16,11 @@ export const stySider = (theme: any) => css`
 	}
 
 	.logo-sidebar {
-		height: 32px;
-		margin: 16px;
-		background: ${hexToRGBA(theme.colors.light, 0.2)};
+		height: 64px;
+		padding: 10px;
+		div {
+			height: 100%;
+		}
 	}
 
 	.site-layout .site-layout-background {

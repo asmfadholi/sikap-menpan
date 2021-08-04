@@ -37,7 +37,25 @@ export const styFormContainer = css`
 export const styLogo = css`
 	${styFlexCentered}
 	margin-bottom: 24px;
+	div {
+		width: 100px;
+	}
 	img {
 		border-radius: 5px;
+	}
+`;
+
+export const styBanner = css`
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	div {
+		height: 100%;
+		width: 100%;
+	}
+	img {
+		object-fit: contain;
 	}
 `;

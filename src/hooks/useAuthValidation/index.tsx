@@ -2,25 +2,27 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
 
-// hooks
-import { useAuthStates } from "contexts/Auth";
-
 const urlsIgnore = ["/login"];
 
 const useAuthValidation = () => {
 	const { replace, events, pathname } = useRouter();
-	const { isLoggedIn, dispatch, setLoading, loading } = useAuthStates();
+	const [loading, setLoading] = useState(true);
 	const [isFirst, setIsFirst] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(() => {
 		const isLoggedInState = Boolean(localStorage.getItem("auth"));
 		if (isFirst) {
 			setTimeout(() => {
-				dispatch({ type: isLoggedInState ? "login" : "logout" });
 				if (!isLoggedInState && !urlsIgnore.includes(pathname)) {
 					replace("/login");
-				} else if (isLoggedInState && urlsIgnore.includes(pathname)) {
-					replace("/");
+				} else if (isLoggedInState) {
+					if (urlsIgnore.includes(pathname)) {
+						replace("/");
+					} else {
+						setLoading(false);
+					}
+					setIsLoggedIn(true);
 				} else {
 					setLoading(false);
 				}
@@ -45,19 +47,12 @@ const useAuthValidation = () => {
 
 		return () => {
 			events.off("routeChangeStart", handleRouteChange);
-			events.off("routeChangeComplete", () => {
-				NProgress.done();
-				setLoading(false);
-			});
+			events.off("routeChangeComplete", () => NProgress.done());
 			events.off("routeChangeError", () => NProgress.done());
 		};
 	}, []);
 
-	return {
-		loading,
-		isLoggedIn,
-		setLoading,
-	};
+	return { loading, setLoading, isLoggedIn };
 };
 
 export default useAuthValidation;

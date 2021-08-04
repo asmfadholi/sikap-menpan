@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Menu, Button, Modal, message, Row, Col } from "antd";
+import Image from "next/image";
 import NProgress from "nprogress";
 import {
 	MenuUnfoldOutlined,
@@ -7,6 +8,9 @@ import {
 	LogoutOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
+
+// images
+import logoSikapWhite from "assets/images/logo-sikap-white.png";
 
 // hooks
 import { useAuthStates } from "contexts/Auth";
@@ -83,7 +87,9 @@ const Authorized = ({ children }) => {
 						collapsed={collapse}
 						style={{ minHeight: "100vh", height: "100%" }}
 					>
-						<div className="logo-sidebar" />
+						<div className="logo-sidebar">
+							<Image src={logoSikapWhite} />
+						</div>
 						<Menu
 							theme="dark"
 							mode="inline"

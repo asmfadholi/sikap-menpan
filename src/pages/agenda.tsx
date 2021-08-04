@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "antd";
 import { Page } from "../components/Page";
 import Agenda from "components/Agenda";
+import withLayout from "helpers/withLayout";
 
 function Index() {
 	return (
@@ -18,4 +19,4 @@ function Index() {
 	);
 }
 
-export default Index;
+export default withLayout(Index, true);

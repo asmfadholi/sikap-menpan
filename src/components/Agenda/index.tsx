@@ -21,8 +21,17 @@ const TableDashboard = () => {
 		page,
 	} = useAgendaList();
 	const [visibleModal, setVisibleModal] = useState(false);
+	const [mode, setMode] = useState("create");
+	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
-	const config = tableConfig({ total, page });
+	const config = tableConfig({
+		total,
+		page,
+		setData,
+		setMode,
+		setVisibleModal,
+		setIsFirstModal,
+	});
 
 	const handleOnChange = (payload) => {
 		const { current = 1 } = payload;
@@ -31,11 +40,14 @@ const TableDashboard = () => {
 	};
 
 	const handleClickNew = () => {
-		setVisibleModal(true);
+		setData({});
+		setMode("create");
 		setIsFirstModal(false);
+		setVisibleModal(true);
 	};
 
 	const propsDataTable = {
+		rowKey: "id",
 		loading,
 		dataSource,
 		onChange: handleOnChange,
@@ -64,6 +76,8 @@ const TableDashboard = () => {
 			<Table {...propsDataTable} />
 			{!isFirstModal && (
 				<CreationModal
+					data={data}
+					mode={mode}
 					visible={visibleModal}
 					setVisible={setVisibleModal}
 				/>

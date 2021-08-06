@@ -1,11 +1,36 @@
 import React from "react";
-import { Space, Button } from "antd";
+import { Space, Button, message, Modal } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const ActionCol = () => {
+const ActionCol = ({
+	setMode,
+	setData,
+	row,
+	setVisibleModal,
+	setIsFirstModal,
+}) => {
+	const handleOnEdit = () => {
+		setMode("edit");
+		setData(row);
+		setVisibleModal(true);
+		setIsFirstModal(false);
+	};
+
+	const handleOnDelete = () => {
+		Modal.confirm({
+			title: `Apakah kamu yakin ingin menghapus "${row.name}"?`,
+			onOk: () =>
+				message.success(`Agenda "${row.name}" berhasil di hapus`),
+		});
+	};
 	return (
 		<Space size={8}>
-			<Button type="default" icon={<EditOutlined />} size="small">
+			<Button
+				type="default"
+				icon={<EditOutlined />}
+				size="small"
+				onClick={handleOnEdit}
+			>
 				Edit
 			</Button>
 			<Button
@@ -13,6 +38,7 @@ const ActionCol = () => {
 				danger
 				icon={<DeleteOutlined />}
 				size="small"
+				onClick={handleOnDelete}
 			>
 				Hapus
 			</Button>

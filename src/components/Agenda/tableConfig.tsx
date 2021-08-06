@@ -1,8 +1,16 @@
 import React from "react";
 
 import ActionCol from "./components/ActionCol";
+import PeriodeCol from "./components/PeriodeCol";
 
-const tableConfig = ({ total = 100, page = 1 }) => {
+const tableConfig = ({
+	total = 100,
+	page = 1,
+	setMode,
+	setData,
+	setVisibleModal,
+	setIsFirstModal,
+}) => {
 	const pagination = {
 		position: ["bottomRight"],
 		showQuickJumper: false,
@@ -17,9 +25,15 @@ const tableConfig = ({ total = 100, page = 1 }) => {
 		{
 			title: "Name Agenda",
 			dataIndex: "name",
-			width: 300,
 			sorter: true,
+			// fixed: "left",
 			key: "name",
+		},
+		{
+			title: "Lokasi",
+			dataIndex: "location",
+			sorter: true,
+			key: "location",
 		},
 		{
 			title: "Detail",
@@ -28,26 +42,52 @@ const tableConfig = ({ total = 100, page = 1 }) => {
 			key: "detail",
 		},
 		{
+			title: "Deskripsi",
+			dataIndex: "description",
+			sorter: true,
+			key: "description",
+		},
+		{
 			title: "Tanggal Agenda",
 			dataIndex: "period",
 			sorter: true,
+			width: 340,
 			key: "period",
+			render: (_, row) => <PeriodeCol row={row} />,
 		},
 		{
-			title: "Aksi",
+			title: "Koordinator",
+			dataIndex: "coordinator",
+			key: "coordinator",
+			render: (val) => val.label,
+		},
+		{
+			title: "Protokol",
+			dataIndex: "protocols",
+			key: "protocols",
+			render: (val) => val.map((pro) => pro.label).join(", "),
+		},
+		{
+			title: "",
 			dataIndex: "action",
-			width: 320,
 			key: "action",
-			render: () => <ActionCol />,
+			render: (_, row) => (
+				<ActionCol
+					setMode={setMode}
+					setData={setData}
+					row={row}
+					setVisibleModal={setVisibleModal}
+					setIsFirstModal={setIsFirstModal}
+				/>
+			),
 		},
 	];
 
 	return {
 		pagination,
 		columns,
-		customTableParam: {},
 		rowKey: "campaignId",
-		scroll: { x: 1300 },
+		scroll: { x: 1800 },
 		sticky: true,
 	};
 };

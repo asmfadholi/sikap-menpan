@@ -1,4 +1,4 @@
-import { AuditOutlined, TeamOutlined } from "@ant-design/icons";
+import { AuditOutlined, TeamOutlined, FileTextOutlined } from "@ant-design/icons";
 
 export default [
 	// {
@@ -15,5 +15,10 @@ export default [
 		name: "Penugasan",
 		key: "/assignment",
 		icon: TeamOutlined,
+	},
+	{
+		name: "Protokoler",
+		key: "/protocoler",
+		icon: FileTextOutlined,
 	},
 ];

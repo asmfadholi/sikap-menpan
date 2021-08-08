@@ -29,12 +29,6 @@ const tableConfig = ({
 			key: "name",
 		},
 		{
-			title: "Status",
-			dataIndex: "status",
-			sorter: true,
-			key: "status",
-		},
-		{
 			title: "Lokasi",
 			dataIndex: "location",
 			sorter: true,

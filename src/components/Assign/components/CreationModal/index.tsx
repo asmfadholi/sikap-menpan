@@ -50,10 +50,10 @@ const CreationModal = ({
 }: CreationModalInterface) => {
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
-	const title = isCreate ? "Buat agenda" : "Edit agenda";
+	const title = `Tugaskan di kegiatan ${data.name}`;
 
 	const handleOnFinish = async () => {
-		message.success(`Berhasil ${isCreate ? "membuat" : "update"} agenda`);
+		message.success(`Berhasil Menugaskan`);
 		setVisible(false);
 	};
 
@@ -76,57 +76,6 @@ const CreationModal = ({
 				initialValues={!isCreate ? sanitizeData(data) : {}}
 				onFinish={handleOnFinish}
 			>
-				<Form.Item label="Nama agenda" rules={[required]} name="name">
-					<Input placeholder="Masukkan nama agenda" />
-				</Form.Item>
-				<Row gutter={16}>
-					<Col span={24} md={12}>
-						<Form.Item
-							label="Tanggal mulai"
-							rules={[required]}
-							name="startDate"
-						>
-							<DatePicker
-								showTime
-								format="dddd DD-MMMM-YYYY HH:mm"
-								placeholder="Masukkan tanggal mulai"
-								style={{ width: "100%" }}
-							/>
-						</Form.Item>
-					</Col>
-					<Col span={24} md={12}>
-						<Form.Item
-							label="Tanggal berakhir"
-							rules={[required]}
-							name="endDate"
-						>
-							<DatePicker
-								showTime
-								format="dddd DD-MMMM-YYYY HH:mm"
-								placeholder="Masukkan tanggal berakhir"
-								style={{ width: "100%" }}
-							/>
-						</Form.Item>
-					</Col>
-				</Row>
-				<Form.Item label="Lokasi" rules={[required]} name="location">
-					<Input placeholder="Masukkan lokasi" />
-				</Form.Item>
-				<Form.Item
-					label="Detail lokasi"
-					rules={[required]}
-					name="detail"
-				>
-					<Input.TextArea placeholder="Masukkan detail lokasi" />
-				</Form.Item>
-				<Form.Item
-					label="Deskripsi"
-					rules={[required]}
-					name="description"
-				>
-					<Input.TextArea placeholder="Masukkan deskripsi agenda" />
-				</Form.Item>
-
 				<Form.Item
 					label="Protokol kegiatan"
 					rules={[required]}
@@ -145,8 +94,21 @@ const CreationModal = ({
 					/>
 				</Form.Item>
 
-				<Form.Item label="Keterangan" rules={[required]} name="notes">
-					<Input.TextArea placeholder="Masukkan keterangan" />
+				<Form.Item
+					label="Status"
+					rules={[required]}
+					name="statusProtocol"
+				>
+					<Select
+						options={[
+							{ value: "Draft", label: "Draft" },
+							{ value: "Tugaskan", label: "Tugaskan" },
+						]}
+						placeholder="Pilih status"
+						allowClear
+						showArrow
+						labelInValue
+					/>
 				</Form.Item>
 
 				<Form.Item noStyle shouldUpdate>
@@ -157,7 +119,7 @@ const CreationModal = ({
 								htmlType="submit"
 								style={{ width: "100%" }}
 							>
-								{isCreate ? "Buat" : "Edit"}
+								Simpan
 							</Button>
 						);
 					}}

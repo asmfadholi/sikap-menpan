@@ -1,14 +1,19 @@
-import { AuditOutlined, UserOutlined } from "@ant-design/icons";
+import { AuditOutlined, TeamOutlined } from "@ant-design/icons";
 
 export default [
+	// {
+	// 	name: "Dashboard",
+	// 	key: "/",
+	// 	icon: UserOutlined,
+	// },
 	{
-		name: "Dashboard",
-		key: "/",
-		icon: UserOutlined,
-	},
-	{
-		name: "Agenda",
+		name: "Kegiatan",
 		key: "/agenda",
 		icon: AuditOutlined,
+	},
+	{
+		name: "Penugasan",
+		key: "/assignment",
+		icon: TeamOutlined,
 	},
 ];

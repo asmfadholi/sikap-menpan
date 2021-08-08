@@ -20,7 +20,7 @@ const ActionCol = ({
 		Modal.confirm({
 			title: `Apakah kamu yakin ingin menghapus "${row.name}"?`,
 			onOk: () =>
-				message.success(`Agenda "${row.name}" berhasil di hapus`),
+				message.success(`Kegiatan "${row.name}" berhasil di hapus`),
 		});
 	};
 	return (

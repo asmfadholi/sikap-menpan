@@ -39,13 +39,6 @@ const TableDashboard = () => {
 		handleFilter(req);
 	};
 
-	const handleClickNew = () => {
-		setData({});
-		setMode("create");
-		setIsFirstModal(false);
-		setVisibleModal(true);
-	};
-
 	const propsDataTable = {
 		rowKey: "id",
 		loading,
@@ -57,20 +50,8 @@ const TableDashboard = () => {
 	return (
 		<div style={{ minHeight: "100vh" }}>
 			<Row>
-				<Col span={12}>
-					<h2>Daftar Agenda</h2>
-				</Col>
-				<Col
-					span={12}
-					style={{ display: "flex", justifyContent: "flex-end" }}
-				>
-					<Button
-						type="primary"
-						style={{ width: "240px" }}
-						onClick={handleClickNew}
-					>
-						Buat Agenda Baru
-					</Button>
+				<Col span={24}>
+					<h2>Daftar Kegiatan</h2>
 				</Col>
 			</Row>
 			<Table {...propsDataTable} />

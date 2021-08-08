@@ -96,7 +96,7 @@ const CreationModal = ({
 							<Input.TextArea placeholder="Masukkan catatan" />
 						</Form.Item>
 					</Panel>
-					<Panel header="Protokoler 2 (Andi Iman)" key="1">
+					<Panel header="Protokoler 2 (Andi Iman)" key="2">
 						<Form.Item
 							label="Penilaian"
 							rules={[required]}

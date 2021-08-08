@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Button, Col, Table } from "antd";
+import { Row, Input, Col, Table } from "antd";
 import { TableProps } from "antd/lib/table";
 import dynamic from "next/dynamic";
 
@@ -54,6 +54,11 @@ const TableDashboard = () => {
 					<h2>Daftar Kegiatan</h2>
 				</Col>
 			</Row>
+			<Input.Search
+				placeholder="Cari kegiatan..."
+				style={{ maxWidth: "350px", marginBottom: "16px" }}
+			/>
+			<br />
 			<Table {...propsDataTable} />
 			{visibleModal && !isFirstModal && (
 				<CreationModal

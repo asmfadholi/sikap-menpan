@@ -55,6 +55,10 @@ const CreationModal = ({
 		setVisible(false);
 	};
 
+	const handleOnChangeUpload = () => {
+		console.log("uploade");
+	};
+
 	return (
 		<Modal
 			visible={visible}
@@ -78,7 +82,7 @@ const CreationModal = ({
 					rules={[required]}
 					name="uploadImage"
 				>
-					<UploadImage />
+					<UploadImage onChange={handleOnChangeUpload} />
 				</Form.Item>
 
 				<Form.Item noStyle shouldUpdate>

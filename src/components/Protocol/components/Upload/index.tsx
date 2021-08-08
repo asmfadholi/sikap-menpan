@@ -18,7 +18,7 @@ const uploadButton = (
 	</div>
 );
 
-const UoloadImage = () => {
+const UploadImage = ({ onChange }) => {
 	const [fileList, setFileList] = useState([]);
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
@@ -35,11 +35,14 @@ const UoloadImage = () => {
 		);
 	};
 
-	const handleChange = ({ fileList }) => setFileList(fileList);
+	const handleChange = ({ fileList }) => {
+		setFileList(fileList);
+		onChange(fileList);
+	};
 	const handleCancel = () => setPreviewVisible(false);
 
 	return (
-		<>
+		<div>
 			<Upload
 				listType="picture-card"
 				fileList={fileList}
@@ -60,8 +63,8 @@ const UoloadImage = () => {
 					src={previewImage}
 				/>
 			</Modal>
-		</>
+		</div>
 	);
 };
 
-export default UoloadImage;
+export default UploadImage;

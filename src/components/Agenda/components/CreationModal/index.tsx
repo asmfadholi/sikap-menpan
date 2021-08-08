@@ -112,13 +112,7 @@ const CreationModal = ({
 				<Form.Item label="Lokasi" rules={[required]} name="location">
 					<Input placeholder="Masukkan lokasi" />
 				</Form.Item>
-				<Form.Item
-					label="Detail lokasi"
-					rules={[required]}
-					name="detail"
-				>
-					<Input.TextArea placeholder="Masukkan detail lokasi" />
-				</Form.Item>
+
 				<Form.Item
 					label="Deskripsi"
 					rules={[required]}
@@ -127,25 +121,20 @@ const CreationModal = ({
 					<Input.TextArea placeholder="Masukkan deskripsi agenda" />
 				</Form.Item>
 
-				<Form.Item
-					label="Protokol kegiatan"
-					rules={[required]}
-					name="protocols"
-				>
+				<Form.Item label="Status" rules={[required]} name="status">
 					<Select
-						mode="multiple"
 						options={[
-							{ value: "pro 1", label: "pro 1" },
-							{ value: "pro 2", label: "pro 2" },
+							{ value: "Diagendakan", label: "Diagendakan" },
+							{ value: "Menugaskan", label: "Menugaskan" },
 						]}
-						placeholder="Pilih protokol"
+						placeholder="Pilih status"
 						allowClear
 						showArrow
 						labelInValue
 					/>
 				</Form.Item>
 
-				<Form.Item label="Keterangan" rules={[required]} name="notes">
+				<Form.Item label="Keterangan" name="notes">
 					<Input.TextArea placeholder="Masukkan keterangan" />
 				</Form.Item>
 

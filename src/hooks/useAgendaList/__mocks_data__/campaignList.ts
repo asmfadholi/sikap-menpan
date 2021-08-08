@@ -11,7 +11,7 @@ export const campaignList = {
 				description: "rapat penting paripurna",
 				coordinator: { value: "koor 1", label: "Koor 1" },
 				notes: "keterangan here",
-				status: "diagendakan",
+				status: { value: "Diagendakan", label: "Diagendakan" },
 				protocols: [
 					{ value: "pro 1", label: "pro 1" },
 					{ value: "pro 2", label: "pro 2" },
@@ -31,7 +31,7 @@ export const campaignList = {
 				description: "rapat penting paripurna",
 				coordinator: { value: "koor 1", label: "Koor 1" },
 				notes: "keterangan here",
-				status: "diagendakan",
+				status: { value: "Diagendakan", label: "Diagendakan" },
 				protocols: [{ value: "pro 1", label: "pro 1" }],
 				audiences: [
 					{ value: "peserta 1", label: "peserta 1" },
@@ -49,7 +49,7 @@ export const campaignList = {
 				coordinator: { value: "koor 1", label: "Koor 1" },
 				protocols: [{ value: "pro 1", label: "pro 1" }],
 				notes: "keterangan here",
-				status: "diagendakan",
+				status: { value: "Diagendakan", label: "Diagendakan" },
 				audiences: [
 					{ value: "peserta 1", label: "peserta 1" },
 					{ value: "peserta 2", label: "peserta 2" },
@@ -66,7 +66,7 @@ export const campaignList = {
 				coordinator: { value: "koor 1", label: "Koor 1" },
 				protocols: [{ value: "pro 1", label: "pro 1" }],
 				notes: "keterangan here",
-				status: "diagendakan",
+				status: { value: "Diagendakan", label: "Diagendakan" },
 				audiences: [
 					{ value: "peserta 1", label: "peserta 1" },
 					{ value: "peserta 2", label: "peserta 2" },

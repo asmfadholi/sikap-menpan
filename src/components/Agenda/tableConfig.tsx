@@ -33,6 +33,7 @@ const tableConfig = ({
 			dataIndex: "status",
 			sorter: true,
 			key: "status",
+			render: (val) => val.label,
 		},
 		{
 			title: "Lokasi",

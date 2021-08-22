@@ -16,13 +16,8 @@ import {
 import { useActivityCreate } from "hooks/useActivityCreate";
 import { useActivityEdit } from "hooks/useActivityEdit";
 
-interface CreationModalInterface {
-	visible: boolean;
-	setVisible: (arg: boolean) => void;
-	refetch?: any;
-	mode: string;
-	data?: any;
-}
+// types
+import { CreationModalInterface } from "./types";
 
 const sanitizeData = (data) => {
 	const {
@@ -73,7 +68,8 @@ const CreationModal = ({
 	data,
 	refetch,
 }: CreationModalInterface) => {
-	const [createActivity, { loading: loadingCreate }]: any = useActivityCreate();
+	const [createActivity, { loading: loadingCreate }]: any =
+		useActivityCreate();
 	const [editActivity, { loading: loadingEdit }]: any = useActivityEdit();
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";

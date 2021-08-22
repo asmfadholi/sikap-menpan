@@ -1,39 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
 
-import { Form, Input, Button, Row, Col, message } from "antd";
+import { Form, Input, Button, Row, Col } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 // images
-// import banner from "assets/images/banner.jpeg";
 import bgImage from "assets/images/bg-image.jpeg";
 import logoVertical from "assets/images/logo-sikap-vertical.png";
 
 // hooks
 import { useAuthStates } from "contexts/Auth";
+import { useLogin } from "hooks/useLogin";
 
 // styles
 import { stySideImage, styFormContainer, styLogo } from "./styles";
 
+// types
+import { RequestBody } from "./types";
+
 const Login = () => {
+	const [handleLogin, { loading }]: any = useLogin();
 	const { dispatch } = useAuthStates();
 	const { push, events } = useRouter();
-	const [loading, setLoading] = useState(false);
 
-	const handleFinish = (res: { email: string; password: string }) => {
-		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
+	const handleFinish = async (body: RequestBody) => {
+		const { token, success, userEmail } = await handleLogin({ body });
+		if (success) {
 			dispatch({ type: "login" });
-			message.success("Berhasil Login");
-			push("/");
 			events.on("routeChangeComplete", () => {
 				NProgress.done();
-				localStorage.setItem("auth", JSON.stringify(res));
+				localStorage.setItem("auth", token);
+				localStorage.setItem("userEmail", userEmail);
 			});
-		}, 1000);
+			push("/");
+		}
 	};
 
 	return (

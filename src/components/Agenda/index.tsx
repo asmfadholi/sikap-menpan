@@ -14,7 +14,7 @@ import { TableProps } from "antd/lib/table";
 import dynamic from "next/dynamic";
 
 // hooks
-import useAgendaList from "hooks/useAgendaList";
+import { useActivity } from "hooks/useActivity";
 
 // connfiguration
 import tableConfig from "./tableConfig";
@@ -23,31 +23,25 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const {
-		loading,
-		list: dataSource,
-		handleFilter,
-		total,
-		page,
-	} = useAgendaList();
+	const { loading, list: dataSource, refetch } = useActivity();
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
 	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
 	const config = tableConfig({
-		total,
-		page,
+		// total,
+		// page,
 		setData,
 		setMode,
 		setVisibleModal,
 		setIsFirstModal,
 	});
 
-	const handleOnChange = (payload) => {
-		const { current = 1 } = payload;
-		const req = { page: current };
-		handleFilter(req);
-	};
+	// const handleOnChange = (payload) => {
+	// 	const { current = 1 } = payload;
+	// 	const req = { page: current };
+	// 	refetch(req);
+	// };
 
 	const handleClickNew = () => {
 		setData({});
@@ -60,7 +54,7 @@ const TableDashboard = () => {
 		rowKey: "id",
 		loading,
 		dataSource,
-		onChange: handleOnChange,
+		// onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 
@@ -115,6 +109,7 @@ const TableDashboard = () => {
 				<CreationModal
 					data={data}
 					mode={mode}
+					refetch={refetch}
 					visible={visibleModal}
 					setVisible={setVisibleModal}
 				/>

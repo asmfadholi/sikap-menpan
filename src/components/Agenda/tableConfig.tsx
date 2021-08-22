@@ -4,8 +4,8 @@ import ActionCol from "./components/ActionCol";
 import PeriodeCol from "./components/PeriodeCol";
 
 const tableConfig = ({
-	total = 100,
-	page = 1,
+	// total = 100,
+	// page = 1,
 	setMode,
 	setData,
 	setVisibleModal,
@@ -16,50 +16,50 @@ const tableConfig = ({
 		showQuickJumper: false,
 		showSizeChanger: true,
 		defaultCurrent: 1,
-		total,
-		current: page,
+		// total,
+		// current: page,
 		pageSize: 10,
 	};
 
 	const columns = [
 		{
 			title: "Name Kegiatan",
-			dataIndex: "name",
+			dataIndex: "activityName",
 			sorter: true,
-			key: "name",
+			key: "activityName",
 		},
 		{
 			title: "Status",
-			dataIndex: "status",
-			sorter: true,
-			key: "status",
-			render: (val) => val.label,
+			dataIndex: "activityStatus",
+			// sorter: true,
+			key: "activityStatus",
+			// render: (val) => val.label,
 		},
 		{
 			title: "Lokasi",
-			dataIndex: "location",
-			sorter: true,
-			key: "location",
+			dataIndex: "activityPlace",
+			// sorter: true,
+			key: "activityPlace",
 		},
 		{
 			title: "Deskripsi",
-			dataIndex: "description",
-			sorter: true,
-			key: "description",
+			dataIndex: "activityDescription",
+			// sorter: true,
+			key: "activityDescription",
 		},
 		{
 			title: "Tanggal Kegiatan",
-			dataIndex: "period",
-			sorter: true,
+			dataIndex: "activityDateStart",
+			// sorter: true,
 			width: 340,
-			key: "period",
+			key: "activityDateStart",
 			render: (_, row) => <PeriodeCol row={row} />,
 		},
 
 		{
 			title: "Keterangan",
-			dataIndex: "notes",
-			key: "notes",
+			dataIndex: "activityDetail",
+			key: "activityDetail",
 		},
 
 		{
@@ -81,7 +81,7 @@ const tableConfig = ({
 	return {
 		pagination,
 		columns,
-		rowKey: "id",
+		rowKey: "activityId",
 		scroll: { x: 1800 },
 		sticky: true,
 	};

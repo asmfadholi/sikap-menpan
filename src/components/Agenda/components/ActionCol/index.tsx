@@ -18,9 +18,11 @@ const ActionCol = ({
 
 	const handleOnDelete = () => {
 		Modal.confirm({
-			title: `Apakah kamu yakin ingin menghapus "${row.name}"?`,
+			title: `Apakah kamu yakin ingin menghapus "${row.activityName}"?`,
 			onOk: () =>
-				message.success(`Kegiatan "${row.name}" berhasil di hapus`),
+				message.success(
+					`Kegiatan "${row.activityName}" berhasil di hapus`,
+				),
 		});
 	};
 	return (

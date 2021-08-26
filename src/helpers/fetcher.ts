@@ -6,7 +6,8 @@ const GET = "get";
 const instanceAxios = () => {
 	const token = localStorage.getItem("auth") || "";
 	return axios.create({
-		baseURL: process.env.baseURL || "https://sikap-api.komit.co.id",
+		baseURL:
+			process.env.NEXT_PUBLIC_BASE_URL || "https://sikap-api.komit.co.id",
 		timeout: 10000,
 		headers: {
 			Authorization: `Bearer ${token}`,

@@ -8,7 +8,7 @@ import {
 export default [
 	{
 		name: "Kegiatan",
-		key: "/agenda",
+		key: "/activity",
 		icon: AuditOutlined,
 	},
 	{
@@ -17,8 +17,8 @@ export default [
 		icon: TeamOutlined,
 	},
 	{
-		name: "Protokoler",
-		key: "/protocoler",
+		name: "Lapor",
+		key: "/report",
 		icon: FileTextOutlined,
 	},
 	{

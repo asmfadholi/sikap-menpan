@@ -1,7 +1,7 @@
 import React from "react";
 
 import ActionCol from "./components/ActionCol";
-import PeriodeCol from "./components/PeriodeCol";
+import PeriodeCol from "../PeriodeCol";
 
 const tableConfig = ({
 	// total = 100,

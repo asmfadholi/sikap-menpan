@@ -1,16 +1,6 @@
 import React from "react";
 import moment from "moment";
-import {
-	Modal,
-	Form,
-	Input,
-	Button,
-	Row,
-	Col,
-	DatePicker,
-	message,
-	Select,
-} from "antd";
+import { Modal, Form, Button, message, Select } from "antd";
 
 interface CreationModalInterface {
 	visible: boolean;

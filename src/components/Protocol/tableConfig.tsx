@@ -1,7 +1,7 @@
 import React from "react";
 
 import ActionCol from "./components/ActionCol";
-import PeriodeCol from "./components/PeriodeCol";
+import PeriodeCol from "../PeriodeCol";
 
 const tableConfig = ({
 	total = 100,
@@ -24,35 +24,42 @@ const tableConfig = ({
 	const columns = [
 		{
 			title: "Name Kegiatan",
-			dataIndex: "name",
+			dataIndex: "activityName",
 			sorter: true,
-			key: "name",
+			key: "activityName",
+		},
+		{
+			title: "Status",
+			dataIndex: "activityStatus",
+			// sorter: true,
+			key: "activityStatus",
+			// render: (val) => val.label,
 		},
 		{
 			title: "Lokasi",
-			dataIndex: "location",
-			sorter: true,
-			key: "location",
+			dataIndex: "activityPlace",
+			// sorter: true,
+			key: "activityPlace",
 		},
 		{
 			title: "Deskripsi",
-			dataIndex: "description",
-			sorter: true,
-			key: "description",
+			dataIndex: "activityDescription",
+			// sorter: true,
+			key: "activityDescription",
 		},
 		{
 			title: "Tanggal Kegiatan",
-			dataIndex: "period",
-			sorter: true,
+			dataIndex: "activityDateStart",
+			// sorter: true,
 			width: 340,
-			key: "period",
+			key: "activityDateStart",
 			render: (_, row) => <PeriodeCol row={row} />,
 		},
 
 		{
 			title: "Keterangan",
-			dataIndex: "notes",
-			key: "notes",
+			dataIndex: "activityDetail",
+			key: "activityDetail",
 		},
 
 		{

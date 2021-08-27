@@ -4,7 +4,7 @@ import { TableProps } from "antd/lib/table";
 import dynamic from "next/dynamic";
 
 // hooks
-import useAgendaList from "hooks/useAgendaList";
+import { useActivity } from "hooks/useActivity";
 
 // connfiguration
 import tableConfig from "./tableConfig";
@@ -13,13 +13,7 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const {
-		loading,
-		list: dataSource,
-		handleFilter,
-		total,
-		page,
-	} = useAgendaList();
+	const { loading, list: dataSource, total, page } = useActivity();
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
 	const [data, setData] = useState({});

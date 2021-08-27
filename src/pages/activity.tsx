@@ -12,7 +12,7 @@ function Index() {
 				<Breadcrumb.Item>
 					<Link href="/">Dashboard</Link>
 				</Breadcrumb.Item>
-				<Breadcrumb.Item>Agenda</Breadcrumb.Item>
+				<Breadcrumb.Item>Kegiatan</Breadcrumb.Item>
 			</Breadcrumb>
 			<Agenda />
 		</Page>

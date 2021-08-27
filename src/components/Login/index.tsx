@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
 
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Input, Button, Row, Col, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 // images
@@ -34,6 +34,7 @@ const Login = () => {
 				localStorage.setItem("auth", token);
 				localStorage.setItem("userEmail", userEmail);
 			});
+			message.success("Berhasil Login");
 			push("/");
 		}
 	};

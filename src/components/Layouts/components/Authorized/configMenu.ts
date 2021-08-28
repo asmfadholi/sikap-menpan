@@ -12,6 +12,11 @@ export default [
 		icon: AuditOutlined,
 	},
 	{
+		name: "Protokoler",
+		key: "/protocoler",
+		icon: TeamOutlined,
+	},
+	{
 		name: "Penugasan",
 		key: "/assignment",
 		icon: TeamOutlined,

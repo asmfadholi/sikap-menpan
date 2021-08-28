@@ -74,15 +74,16 @@ const TableDashboard = () => {
 
 	return (
 		<div style={{ minHeight: "100vh" }}>
-			<Row>
-				<Col span={12}>
+			<Row gutter={[16, 16]}>
+				<Col span={24} md={12}>
 					<h2>Daftar Agenda</h2>
 				</Col>
 				<Col
-					span={12}
+					span={24}
+					md={12}
 					style={{ display: "flex", justifyContent: "flex-end" }}
 				>
-					<Space size={16}>
+					<Space size={16} wrap style={{ marginBottom: "12px" }}>
 						<Dropdown.Button
 							onClick={handleButtonClick}
 							overlay={menu}
@@ -91,7 +92,7 @@ const TableDashboard = () => {
 						</Dropdown.Button>
 						<Button
 							type="primary"
-							style={{ width: "240px" }}
+							style={{ maxWidth: "240px", width: '100%' }}
 							onClick={handleClickNew}
 						>
 							Buat Agenda Baru

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Breadcrumb } from "antd";
 import { Page } from "../components/Page";
-import Protocol from "components/Report";
+import Protocoler from "components/Protocoler";
 import withLayout from "helpers/withLayout";
 
 function Index() {
@@ -12,9 +12,9 @@ function Index() {
 				<Breadcrumb.Item>
 					<Link href="/">Dashboard</Link>
 				</Breadcrumb.Item>
-				<Breadcrumb.Item>Kegiatan</Breadcrumb.Item>
+				<Breadcrumb.Item>Protokoler</Breadcrumb.Item>
 			</Breadcrumb>
-			<Protocol />
+			<Protocoler />
 		</Page>
 	);
 }

@@ -92,7 +92,7 @@ const TableDashboard = () => {
 						</Dropdown.Button>
 						<Button
 							type="primary"
-							style={{ maxWidth: "240px", width: '100%' }}
+							style={{ width: "100%" }}
 							onClick={handleClickNew}
 						>
 							Buat Agenda Baru

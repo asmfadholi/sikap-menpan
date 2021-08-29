@@ -76,7 +76,9 @@ const TableDashboard = () => {
 
 	return (
 		<div style={{ minHeight: "100vh" }}>
-			<Typography.Title level={2}>Daftar Kegiatan </Typography.Title>
+			<Typography.Title level={2} style={{ marginBottom: "19px" }}>
+				Daftar Kegiatan{" "}
+			</Typography.Title>
 
 			<Row gutter={[16, 16]}>
 				<Col span={24} lg={12}>

@@ -79,18 +79,18 @@ const TableDashboard = () => {
 			<Typography.Title level={2}>Daftar Kegiatan </Typography.Title>
 
 			<Row gutter={[16, 16]}>
-				<Col span={24} md={12}>
-					<Space size={16}>
+				<Col span={24} lg={12}>
+					<Space size={16} wrap>
 						<Input.Search
-							placeholder="Cari kegiatan..."
-							style={{ width: "350px" }}
+							placeholder="Cari kegiatan disini..."
+							style={{ maxWidth: "350px" }}
 						/>
 						<Button icon={<FilterOutlined />}>Filters </Button>
 					</Space>
 				</Col>
 				<Col
 					span={24}
-					md={12}
+					lg={12}
 					style={{ display: "flex", justifyContent: "flex-end" }}
 				>
 					<Space size={16} wrap style={{ marginBottom: "12px" }}>

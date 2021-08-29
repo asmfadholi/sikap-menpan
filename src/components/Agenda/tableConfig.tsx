@@ -46,6 +46,7 @@ const tableConfig = ({
 		{
 			title: "Dihadiri",
 			dataIndex: "audience",
+			width: 150,
 			key: "audience",
 			render: (val) => val || "-",
 		},

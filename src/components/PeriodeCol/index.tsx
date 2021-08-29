@@ -3,19 +3,42 @@ import moment from "moment";
 import type { RowArg } from "./types";
 
 // style(s)
-import { styDate, styDateFirst } from "./styles";
+import { styTime, styDate } from "./styles";
 
 import "moment/locale/id";
 
-const checkDate = (dateDate, timeData) => {
-	const newDate = moment(dateDate).format("DD MMM YYYY");
-	if (String(newDate) === "Invalid date") {
+const FORMAT_DATE = "DD MMM YYYY";
+
+const convertDate = (startDate, endDate) => {
+	const start = moment(startDate).format(FORMAT_DATE);
+	const end = moment(endDate).format(FORMAT_DATE);
+	const invalidDate =
+		String(startDate) === "Invalid date" ||
+		String(endDate) === "Invalid date";
+	if (invalidDate) {
 		return "-";
 	} else {
 		return (
-			<span>
-				<b>{newDate}</b> {timeData} WIB
-			</span>
+			<div>
+				{" "}
+				{start} - {end}
+			</div>
+		);
+	}
+};
+
+const convertTime = (startTime, endTime) => {
+	const invalidTime = !startTime && !endTime;
+	const start = startTime.split(":");
+	const end = endTime.split(":");
+	if (invalidTime) {
+		return "";
+	} else {
+		return (
+			<div>
+				{" "}
+				{start[0]}:{start[1]} - {end[0]}:{end[1]} WIB
+			</div>
 		);
 	}
 };
@@ -29,12 +52,12 @@ const PeriodeCol = ({ row }: RowArg) => {
 	} = row;
 	return (
 		<>
-			<div css={styDateFirst}>
-				{checkDate(activityDateStart, activityTimeStart)}
+			<div css={styDate}>
+				{convertDate(activityDateStart, activityDateEnd)}
 			</div>
 
-			<div css={styDate}>
-				{checkDate(activityDateEnd, activityTimeEnd)}
+			<div css={styTime}>
+				{convertTime(activityTimeStart, activityTimeEnd)}
 			</div>
 		</>
 	);

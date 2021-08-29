@@ -1,6 +1,12 @@
 import React from "react";
-import { Space, Button, message, Modal } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Space, Menu, message, Modal, Dropdown, Button } from "antd";
+import {
+	EditOutlined,
+	EllipsisOutlined,
+	DeleteOutlined,
+} from "@ant-design/icons";
+
+import { styIconElipsis, styEdit } from "./styles";
 
 const ActionCol = ({
 	setMode,
@@ -25,9 +31,31 @@ const ActionCol = ({
 				),
 		});
 	};
+
+	const menu = (
+		<Menu>
+			<Menu.Item key="0">
+				<Button type="link" onClick={handleOnEdit} css={styEdit}>
+					<EditOutlined /> Edit
+				</Button>
+			</Menu.Item>
+			<Menu.Divider />
+			<Menu.Item key="1">
+				<Button danger type="link" onClick={handleOnDelete}>
+					<DeleteOutlined /> Hapus
+				</Button>
+			</Menu.Item>
+		</Menu>
+	);
+
 	return (
 		<Space size={8}>
-			<Button
+			<Dropdown overlay={menu} trigger={["click"]}>
+				<div css={styIconElipsis}>
+					<EllipsisOutlined />
+				</div>
+			</Dropdown>
+			{/* <Button
 				type="default"
 				icon={<EditOutlined />}
 				size="small"
@@ -43,7 +71,7 @@ const ActionCol = ({
 				onClick={handleOnDelete}
 			>
 				Hapus
-			</Button>
+			</Button> */}
 		</Space>
 	);
 };

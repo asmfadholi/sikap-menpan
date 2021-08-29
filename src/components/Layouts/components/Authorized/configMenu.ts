@@ -3,9 +3,15 @@ import {
 	TeamOutlined,
 	FileTextOutlined,
 	GoldOutlined,
+	AppstoreOutlined,
 } from "@ant-design/icons";
 
 export default [
+	{
+		name: "Dashboard",
+		key: "/",
+		icon: AppstoreOutlined,
+	},
 	{
 		name: "Kegiatan",
 		key: "/activity",

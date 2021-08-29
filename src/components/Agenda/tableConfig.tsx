@@ -1,6 +1,9 @@
 import React from "react";
 
 import ActionCol from "./components/ActionCol";
+import LocationCol from "./components/LocationCol";
+import StatusCol from "./components/StatusCol";
+import NameCol from "./components/NameCol";
 import PeriodeCol from "../PeriodeCol";
 
 const tableConfig = ({
@@ -25,43 +28,33 @@ const tableConfig = ({
 		{
 			title: "Name Kegiatan",
 			dataIndex: "activityName",
-			sorter: true,
 			key: "activityName",
+			render: (_, row) => <NameCol row={row} />,
 		},
 		{
-			title: "Status",
-			dataIndex: "activityStatus",
-			// sorter: true,
-			key: "activityStatus",
-			// render: (val) => val.label,
+			title: "Waktu  Kegiatan",
+			dataIndex: "activityDateStart",
+			key: "activityDateStart",
+			render: (_, row) => <PeriodeCol row={row} />,
 		},
 		{
 			title: "Lokasi",
 			dataIndex: "activityPlace",
-			// sorter: true,
 			key: "activityPlace",
+			render: (_, row) => <LocationCol row={row} />,
 		},
 		{
-			title: "Deskripsi",
-			dataIndex: "activityDescription",
-			// sorter: true,
-			key: "activityDescription",
+			title: "Dihadiri",
+			dataIndex: "audience",
+			key: "audience",
+			render: (val) => val || "-",
 		},
 		{
-			title: "Tanggal Kegiatan",
-			dataIndex: "activityDateStart",
-			// sorter: true,
-			width: 340,
-			key: "activityDateStart",
-			render: (_, row) => <PeriodeCol row={row} />,
+			title: "Status",
+			dataIndex: "activityStatus",
+			key: "activityStatus",
+			render: (_, row) => <StatusCol row={row} />,
 		},
-
-		{
-			title: "Keterangan",
-			dataIndex: "activityDetail",
-			key: "activityDetail",
-		},
-
 		{
 			title: "",
 			dataIndex: "action",
@@ -82,7 +75,7 @@ const tableConfig = ({
 		pagination,
 		columns,
 		rowKey: "activityId",
-		scroll: { x: 1800 },
+		scroll: { x: "max-content" },
 		sticky: true,
 	};
 };

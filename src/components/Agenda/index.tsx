@@ -5,11 +5,15 @@ import {
 	Col,
 	Table,
 	Space,
-	Dropdown,
-	Menu,
 	message,
 	Input,
+	Typography,
 } from "antd";
+import {
+	FilterOutlined,
+	DownloadOutlined,
+	SyncOutlined,
+} from "@ant-design/icons";
 import { TableProps } from "antd/lib/table";
 import dynamic from "next/dynamic";
 
@@ -58,15 +62,13 @@ const TableDashboard = () => {
 		...config,
 	} as TableProps<any>;
 
-	const handleMenuClick = () => {
-		message.success("Berhasil download template csv");
+	const handleSync = () => {
+		message.success("Berhasil tarik data sigeta");
 	};
 
-	const menu = (
-		<Menu onClick={handleMenuClick}>
-			<Menu.Item key="1">Download Template</Menu.Item>
-		</Menu>
-	);
+	const handleDownloadTemplate = () => {
+		message.success("Berhasil download template csv");
+	};
 
 	const handleButtonClick = () => {
 		message.success("Berhasil upload csv");
@@ -74,9 +76,17 @@ const TableDashboard = () => {
 
 	return (
 		<div style={{ minHeight: "100vh" }}>
+			<Typography.Title level={2}>Daftar Kegiatan </Typography.Title>
+
 			<Row gutter={[16, 16]}>
 				<Col span={24} md={12}>
-					<h2>Daftar Agenda</h2>
+					<Space size={16}>
+						<Input.Search
+							placeholder="Cari kegiatan..."
+							style={{ width: "350px" }}
+						/>
+						<Button icon={<FilterOutlined />}>Filters </Button>
+					</Space>
 				</Col>
 				<Col
 					span={24}
@@ -84,12 +94,21 @@ const TableDashboard = () => {
 					style={{ display: "flex", justifyContent: "flex-end" }}
 				>
 					<Space size={16} wrap style={{ marginBottom: "12px" }}>
-						<Dropdown.Button
-							onClick={handleButtonClick}
-							overlay={menu}
-						>
-							Upload CSV
-						</Dropdown.Button>
+						<Button onClick={handleSync} icon={<SyncOutlined />}>
+							Tarik Data Sigeta
+						</Button>
+						<div>
+							<Button onClick={handleButtonClick}>
+								Upload CSV
+							</Button>
+							<Button
+								onClick={handleDownloadTemplate}
+								style={{ padding: "0 10px" }}
+							>
+								<DownloadOutlined />
+							</Button>
+						</div>
+
 						<Button
 							type="primary"
 							style={{ width: "100%" }}
@@ -100,11 +119,6 @@ const TableDashboard = () => {
 					</Space>
 				</Col>
 			</Row>
-			<Input.Search
-				placeholder="Cari kegiatan..."
-				style={{ maxWidth: "350px", marginBottom: "16px" }}
-			/>
-			<br />
 			<Table {...propsDataTable} />
 			{visibleModal && !isFirstModal && (
 				<CreationModal

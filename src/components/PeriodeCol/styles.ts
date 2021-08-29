@@ -1,20 +1,18 @@
 import { css } from "@emotion/react";
 
 export const styDate = css`
-	padding: 10px 0;
+	font-style: normal;
+	font-weight: normal;
 	font-size: 14px;
+	line-height: 16px;
+	color: #535c65;
+	margin-bottom: 4px;
 `;
 
-export const styDateFirst = css`
-	${styDate}
-	position: relative;
-	&:before {
-		content: "";
-		height: 2px;
-		width: 185px;
-		background: #ffc041;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-	}
+export const styTime = css`
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 14px;
+	color: #7e848c;
 `;

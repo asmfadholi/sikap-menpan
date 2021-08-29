@@ -12,6 +12,14 @@ const globalStyles = (
 				scroll-behavior: smooth;
 			}
 
+			h2 {
+				font-size: 18px !important;
+				font-style: normal;
+				font-weight: 500;
+				font-size: 18px;
+				line-height: 21px;
+			}
+
 			body {
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-text-size-adjust: 100%;

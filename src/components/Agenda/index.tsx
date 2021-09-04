@@ -33,19 +33,11 @@ const TableDashboard = () => {
 	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
 	const config = tableConfig({
-		// total,
-		// page,
 		setData,
 		setMode,
 		setVisibleModal,
 		setIsFirstModal,
 	});
-
-	// const handleOnChange = (payload) => {
-	// 	const { current = 1 } = payload;
-	// 	const req = { page: current };
-	// 	refetch(req);
-	// };
 
 	const handleClickNew = () => {
 		setData({});
@@ -58,7 +50,6 @@ const TableDashboard = () => {
 		rowKey: "id",
 		loading,
 		dataSource,
-		// onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 

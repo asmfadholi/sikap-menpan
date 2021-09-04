@@ -13,31 +13,22 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const { loading, list: dataSource, total, page } = useActivity();
+	const { loading, list: dataSource } = useActivity();
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
 	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
 	const config = tableConfig({
-		total,
-		page,
 		setData,
 		setMode,
 		setVisibleModal,
 		setIsFirstModal,
 	});
 
-	// const handleOnChange = (payload) => {
-	// 	const { current = 1 } = payload;
-	// 	const req = { page: current };
-	// 	handleFilter(req);
-	// };
-
 	const propsDataTable = {
 		rowKey: "id",
 		loading,
 		dataSource,
-		// onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 

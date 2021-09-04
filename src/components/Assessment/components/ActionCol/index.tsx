@@ -19,9 +19,10 @@ const ActionCol = ({
 	return (
 		<Space size={8}>
 			<Button
-				type="default"
+				type="primary"
 				icon={<SolutionOutlined />}
 				size="small"
+				ghost
 				onClick={handleOnEdit}
 			>
 				Beri Nilai

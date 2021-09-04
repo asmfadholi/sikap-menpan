@@ -1,9 +1,9 @@
 import {
-	AuditOutlined,
 	TeamOutlined,
 	FileTextOutlined,
 	GoldOutlined,
 	AppstoreOutlined,
+	CalendarOutlined,
 } from "@ant-design/icons";
 
 export default [
@@ -15,7 +15,7 @@ export default [
 	{
 		name: "Kegiatan",
 		key: "/activity",
-		icon: AuditOutlined,
+		icon: CalendarOutlined,
 	},
 	{
 		name: "Protokoler",

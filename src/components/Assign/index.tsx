@@ -25,17 +25,10 @@ const TableDashboard = () => {
 		setIsFirstModal,
 	});
 
-	// const handleOnChange = (payload) => {
-	// 	const { current = 1 } = payload;
-	// 	const req = { page: current };
-	// 	handleFilter(req);
-	// };
-
 	const propsDataTable = {
 		rowKey: "id",
 		loading,
 		dataSource,
-		// onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 

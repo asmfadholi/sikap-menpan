@@ -19,7 +19,8 @@ const ActionCol = ({
 	return (
 		<Space size={8}>
 			<Button
-				type="default"
+				type="primary"
+				ghost
 				icon={<FileDoneOutlined />}
 				size="small"
 				onClick={handleOnEdit}

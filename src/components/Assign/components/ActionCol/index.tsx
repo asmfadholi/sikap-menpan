@@ -18,12 +18,7 @@ const ActionCol = ({
 
 	return (
 		<Space size={8}>
-			<Button
-				type="default"
-				icon={<TeamOutlined />}
-				size="small"
-				onClick={handleOnEdit}
-			>
+			<Button type="primary" ghost size="small" onClick={handleOnEdit}>
 				Tugaskan
 			</Button>
 		</Space>

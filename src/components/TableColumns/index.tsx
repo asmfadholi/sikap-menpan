@@ -41,6 +41,7 @@ const TableColumns = ({
 			title: "Name Kegiatan",
 			dataIndex: "activityName",
 			key: "activityName",
+			filterSearch: true,
 			render: (_, row) => <NameCol row={row} />,
 		},
 		{

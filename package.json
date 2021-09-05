@@ -37,6 +37,7 @@
 	"author": "Luan Gjokaj <luan@riangle.com>",
 	"license": "MIT",
 	"dependencies": {
+		"@ant-design/charts": "^1.2.11",
 		"@ant-design/icons": "^4.6.2",
 		"@emotion/babel-plugin": "^11.3.0",
 		"@emotion/eslint-plugin": "^11.2.0",

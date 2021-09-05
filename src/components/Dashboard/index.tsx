@@ -51,7 +51,7 @@ function Dashboard() {
 				})}
 			</Row>
 			<Card style={{ marginTop: "44px" }}>
-                <h2>Client Retention </h2>
+				<h2>Client Retention </h2>
 				<Column {...config} />
 			</Card>
 		</>

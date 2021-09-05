@@ -53,7 +53,6 @@ const TableColumns = ({
 			title: "Lokasi",
 			dataIndex: "activityPlace",
 			key: "activityPlace",
-			sorter: true,
 			render: (_, row) => <LocationCol row={row} />,
 		},
 		...activeAudience,

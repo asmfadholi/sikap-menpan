@@ -1,8 +1,6 @@
 import React from "react";
 import { Space, Rate, Tag } from "antd";
 
-import { styName } from "./styles";
-
 const RateCol = ({ row }) => {
 	const { maxRating, meanRating } = row;
 	return (

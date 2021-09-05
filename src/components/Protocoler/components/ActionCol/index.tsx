@@ -1,6 +1,5 @@
 import React from "react";
 import { Space, Button } from "antd";
-import { SolutionOutlined } from "@ant-design/icons";
 
 const ActionCol = ({ setData, row, setVisibleModal, setIsFirstModal }) => {
 	const handleOnDetail = () => {

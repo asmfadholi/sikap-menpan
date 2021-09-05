@@ -41,7 +41,6 @@ const TableColumns = ({
 			title: "Name Kegiatan",
 			dataIndex: "activityName",
 			key: "activityName",
-			filterSearch: true,
 			render: (_, row) => <NameCol row={row} />,
 		},
 		{
@@ -54,6 +53,7 @@ const TableColumns = ({
 			title: "Lokasi",
 			dataIndex: "activityPlace",
 			key: "activityPlace",
+			sorter: true,
 			render: (_, row) => <LocationCol row={row} />,
 		},
 		...activeAudience,

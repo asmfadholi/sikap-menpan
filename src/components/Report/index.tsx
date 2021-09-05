@@ -11,7 +11,7 @@ import tableConfig from "./tableConfig";
 // components
 const CreationModal = dynamic(import("./components/CreationModal"));
 const TableDashboard = () => {
-	const { loading, list: dataSource } = useActivity();
+	const { loading, list: dataSource, refetch } = useActivity();
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
 	const [data, setData] = useState({});
@@ -40,6 +40,7 @@ const TableDashboard = () => {
 			<Input.Search
 				placeholder="Cari kegiatan..."
 				style={{ maxWidth: "350px", marginBottom: "16px" }}
+				onSearch={refetch}
 			/>
 			<br />
 			<Table {...propsDataTable} />

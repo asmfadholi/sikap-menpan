@@ -46,11 +46,18 @@ const useActivity = () => {
 		getData({});
 	}, []);
 
-	// return [getData, { data, loading, error }];
+	const handleOnSearch = (val = "") => {
+		const params = {
+			p: 1,
+			s: val,
+		};
+		getData(params);
+	};
+
 	return {
 		loading,
 		list: data?.data || [],
-		refetch: getData,
+		refetch: handleOnSearch,
 		total: 100,
 		page: 1,
 		error,

@@ -77,6 +77,7 @@ const TableDashboard = () => {
 						<Input.Search
 							placeholder="Cari kegiatan disini..."
 							style={{ maxWidth: "350px" }}
+							onSearch={refetch}
 						/>
 						<Button icon={<FilterOutlined />}>Filters </Button>
 					</Space>

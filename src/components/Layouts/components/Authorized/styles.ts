@@ -28,6 +28,27 @@ export const stySider = (theme: any) => css`
 		}
 	}
 
+	.menu-account {
+		display: flex;
+		justify-content: flex-end;
+		.name {
+			font-style: normal;
+			font-weight: 500;
+			font-size: 12px;
+			line-height: 14px;
+			color: #000000;
+		}
+		.ant-dropdown-trigger {
+			margin-right: 16px;
+		}
+		.wrapper {
+			cursor: pointer;
+			.icon-style {
+				font-size: 12px;
+			}
+		}
+	}
+
 	.site-layout .site-layout-background {
 		background: ${theme.colors.light};
 	}
@@ -35,6 +56,4 @@ export const stySider = (theme: any) => css`
 
 export const styLogout = css`
 	height: 100%;
-	margin: 0 24px;
-	float: right;
 `;

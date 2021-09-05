@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Menu, Button, Modal, message, Row, Col } from "antd";
+import {
+	Layout,
+	Menu,
+	Button,
+	Modal,
+	message,
+	Row,
+	Col,
+	Dropdown,
+	Space,
+	Avatar,
+} from "antd";
 import Image from "next/image";
 import NProgress from "nprogress";
 import {
@@ -8,6 +19,7 @@ import {
 	LogoutOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
+import { DownOutlined } from "@ant-design/icons";
 
 // images
 import logoSikapWhite from "assets/images/logo-sikap-white.png";
@@ -77,6 +89,21 @@ const Authorized = ({ children }) => {
 
 	const handleSelect = (res) => push(res.key);
 
+	const menu = (
+		<Menu>
+			<Menu.Item key="0">
+				<Button
+					danger
+					type="link"
+					css={styLogout}
+					onClick={handleLogout}
+				>
+					<LogoutOutlined /> Logout
+				</Button>
+			</Menu.Item>
+		</Menu>
+	);
+
 	return (
 		<Layout css={stySider}>
 			<Row>
@@ -129,15 +156,26 @@ const Authorized = ({ children }) => {
 								{configMenu.map(generateMenu)}
 							</Menu>
 						</Col>
-						<Col span={12}>
-							<Button
+						<Col span={12} className="menu-account">
+							{/* <Button
 								danger
 								type="link"
 								css={styLogout}
 								onClick={handleLogout}
 							>
 								Logout <LogoutOutlined />
-							</Button>
+							</Button> */}
+							<Dropdown overlay={menu} trigger={["click"]}>
+								<div className="wrapper">
+									<Space align="center">
+										<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+
+										<div className="name">Amir Hamzah</div>
+
+										<DownOutlined className="icon-style" />
+									</Space>
+								</div>
+							</Dropdown>
 						</Col>
 					</Row>
 				</Header>

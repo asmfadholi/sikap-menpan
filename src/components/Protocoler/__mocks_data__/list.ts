@@ -3,9 +3,10 @@ export const LIST = [
 		id: 1,
 		name: "Ahmad ke satu",
 		email: "ahmad1@gmail.com",
+		no_induk: 12345678999119,
 		totalTask: 3,
-		meanRating: 7.5,
-		maxRating: 10,
+		meanRating: 4.5,
+		maxRating: 5,
 		detail: [
 			{
 				id: 1,
@@ -17,7 +18,7 @@ export const LIST = [
 				activityDetail: "Deatil",
 				activityTimeEnd: "17:05:04",
 				activityTimeStart: "17:05:04",
-				rating: 7.5,
+				rating: 4.5,
 			},
 			{
 				id: 2,
@@ -29,7 +30,7 @@ export const LIST = [
 				activityDetail: "Deatil",
 				activityTimeEnd: "17:05:04",
 				activityTimeStart: "17:05:04",
-				rating: 7.5,
+				rating: 4.5,
 			},
 			{
 				id: 3,
@@ -41,7 +42,7 @@ export const LIST = [
 				activityTimeEnd: "17:05:04",
 				activityTimeStart: "17:05:04",
 				activityDetail: "Deatil",
-				rating: 7.5,
+				rating: 4.5,
 			},
 		],
 	},

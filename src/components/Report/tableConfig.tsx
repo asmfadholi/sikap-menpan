@@ -1,6 +1,7 @@
 import React from "react";
 
 import ActionCol from "./components/ActionCol";
+import ProtocolerCol from "./components/ProtocolerCol";
 import TableColumns from "../TableColumns";
 
 const tableConfig = ({
@@ -17,9 +18,15 @@ const tableConfig = ({
 	};
 
 	const columns = [
-		...TableColumns(),
+		...TableColumns({ status: false }),
 		{
-			title: "",
+			title: "Protokoler",
+			dataIndex: "protocoler",
+			key: "protocoler",
+			render: () => <ProtocolerCol />,
+		},
+		{
+			title: "Action",
 			dataIndex: "action",
 			key: "action",
 			render: (_, row) => (

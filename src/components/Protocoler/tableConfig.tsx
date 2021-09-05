@@ -2,42 +2,40 @@ import React from "react";
 
 import ActionCol from "./components/ActionCol";
 import NameCol from "./components/NameCol";
+import RateCol from "./components/RateCol";
 
-const tableConfig = ({
-	total = 1,
-	page = 1,
-	setData,
-	setVisibleModal,
-	setIsFirstModal,
-}) => {
+const tableConfig = ({ setData, setVisibleModal, setIsFirstModal }) => {
 	const pagination = {
 		position: ["bottomRight"],
 		showQuickJumper: false,
 		showSizeChanger: true,
 		defaultCurrent: 1,
-		total,
-		current: page,
-		pageSize: 10,
 	};
 
 	const columns = [
 		{
-			title: "Nama",
-			dataIndex: "name",
+			title: "Protokoler",
+			dataIndex: "protocoler",
 			width: 320,
-			key: "name",
+			key: "protocoler",
 			render: (_, row) => <NameCol row={row} />,
+		},
+		{
+			title: "No. Induk",
+			dataIndex: "no_induk",
+			key: "no_induk",
 		},
 		{
 			title: "Total Tugas",
 			dataIndex: "totalTask",
+			width: 120,
 			key: "totalTask",
 		},
 		{
-			title: "Rata-rata nilai",
+			title: "Nilai Rata-Rata ",
 			dataIndex: "meanRating",
 			key: "meanRating",
-			render: (val, row) => `${val}/${row.maxRating}`,
+			render: (_, row) => <RateCol row={row} />,
 		},
 
 		{

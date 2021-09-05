@@ -1,8 +1,10 @@
 import {
-	TeamOutlined,
-	FileTextOutlined,
-	GoldOutlined,
+	ContactsOutlined,
+	FileDoneOutlined,
+	FileOutlined,
+	SafetyCertificateOutlined,
 	AppstoreOutlined,
+	SettingOutlined,
 	CalendarOutlined,
 } from "@ant-design/icons";
 
@@ -18,23 +20,28 @@ export default [
 		icon: CalendarOutlined,
 	},
 	{
-		name: "Protokoler",
-		key: "/protocoler",
-		icon: TeamOutlined,
-	},
-	{
 		name: "Penugasan",
 		key: "/assignment",
-		icon: TeamOutlined,
+		icon: ContactsOutlined,
 	},
 	{
 		name: "Lapor",
 		key: "/report",
-		icon: FileTextOutlined,
+		icon: FileOutlined,
 	},
 	{
 		name: "Penilaian",
 		key: "/assessment",
-		icon: GoldOutlined,
+		icon: FileDoneOutlined,
+	},
+	{
+		name: "Protokoler",
+		key: "/protocoler",
+		icon: SafetyCertificateOutlined,
+	},
+	{
+		name: "Setting",
+		key: "/setting",
+		icon: SettingOutlined,
 	},
 ];

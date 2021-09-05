@@ -14,7 +14,7 @@ const TableDetailModal = ({
 	data,
 }: CreationModalInterface) => {
 	const [form] = Form.useForm();
-	const title = "Detail Penilaian Protokoler di kegiatan";
+	const title = "Detail Penilaian Protokoler";
 
 	const onHandleCancel = () => {
 		form.resetFields();

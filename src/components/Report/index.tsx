@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Input, Col, Table } from "antd";
 import { TableProps } from "antd/lib/table";
 import dynamic from "next/dynamic";
-
 // hooks
 import { useActivity } from "hooks/useActivity";
 
@@ -11,7 +10,6 @@ import tableConfig from "./tableConfig";
 
 // components
 const CreationModal = dynamic(import("./components/CreationModal"));
-
 const TableDashboard = () => {
 	const { loading, list: dataSource } = useActivity();
 	const [visibleModal, setVisibleModal] = useState(false);

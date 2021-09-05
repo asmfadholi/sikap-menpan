@@ -12,8 +12,10 @@ import { LIST } from "./__mocks_data__/list";
 // components
 const TableDetailModal = dynamic(import("./components/TableDetailModal"));
 
+// styles
+import { styTable } from "./styles";
+
 const TableDashboard = () => {
-	// const { loading, list: dataSource } = useActivity();
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
@@ -23,17 +25,10 @@ const TableDashboard = () => {
 		setIsFirstModal,
 	});
 
-	// const handleOnChange = (payload) => {
-	// 	const { current = 1 } = payload;
-	// 	const req = { page: current };
-	// 	handleFilter(req);
-	// };
-
 	const propsDataTable = {
 		rowKey: "id",
 		loading: false,
 		dataSource: LIST,
-		// onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 
@@ -41,15 +36,15 @@ const TableDashboard = () => {
 		<div style={{ minHeight: "100vh" }}>
 			<Row>
 				<Col span={24}>
-					<h2>Daftar Kegiatan</h2>
+					<h2>Daftar Protokoler</h2>
 				</Col>
 			</Row>
 			<Input.Search
-				placeholder="Cari kegiatan..."
+				placeholder="Cari protokoler di sini..."
 				style={{ maxWidth: "350px", marginBottom: "16px" }}
 			/>
 			<br />
-			<Table {...propsDataTable} />
+			<Table {...propsDataTable} css={styTable} />
 			{visibleModal && !isFirstModal && (
 				<TableDetailModal
 					data={data}

@@ -1,64 +1,33 @@
 import React from "react";
 
-import PeriodeCol from "components/PeriodeCol";
+import TableColumns from "components/TableColumns";
+import RateCol from "../../../RateCol";
 
 const tableConfig = () => {
 	const pagination = {
 		position: ["bottomRight"],
 		showQuickJumper: false,
 		showSizeChanger: true,
-		defaultCurrent: 1,
-		// total,
-		// current: page,
-		pageSize: 10,
 	};
 
 	const columns = [
-		{
-			title: "Name Kegiatan",
-			dataIndex: "activityName",
-			key: "activityName",
-		},
-		{
-			title: "Lokasi",
-			dataIndex: "activityPlace",
-			key: "activityPlace",
-		},
-		{
-			title: "Deskripsi",
-			dataIndex: "activityDescription",
-			key: "activityDescription",
-		},
-		{
-			title: "Deskripsi",
-			dataIndex: "activityDescription",
-			key: "activityDescription",
-		},
-		{
-			title: "Tanggal Kegiatan",
-			dataIndex: "activityDateStart",
-			width: 340,
-			key: "activityDateStart",
-			render: (_, row) => <PeriodeCol row={row} />,
-		},
-
-		{
-			title: "Keterangan",
-			dataIndex: "activityDetail",
-			key: "activityDetail",
-		},
+		...TableColumns({ status: false, audience: false }),
 		{
 			title: "Nilai",
 			dataIndex: "rating",
 			key: "rating",
+			render: (_, { rating }) => (
+				<RateCol row={{ meanRating: rating, maxRating: 5 }} />
+			),
 		},
 	];
 
 	return {
+		bordered: true,
 		pagination,
 		columns,
 		rowKey: "activityId",
-		scroll: { x: 1800 },
+		scroll: { x: "max-content" },
 		sticky: true,
 	};
 };

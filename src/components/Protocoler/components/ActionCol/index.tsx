@@ -11,12 +11,7 @@ const ActionCol = ({ setData, row, setVisibleModal, setIsFirstModal }) => {
 
 	return (
 		<Space size={8}>
-			<Button
-				type="default"
-				icon={<SolutionOutlined />}
-				size="small"
-				onClick={handleOnDetail}
-			>
+			<Button type="primary" ghost size="middle" onClick={handleOnDetail}>
 				Detail
 			</Button>
 		</Space>

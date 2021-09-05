@@ -1,15 +1,17 @@
 import React from "react";
-import { Space } from "antd";
+import { Space, Avatar } from "antd";
 
-import { styName, styEmail, stySpace } from "./styles";
+import { styName } from "./styles";
 
 const NameCol = ({ row }) => {
-	const { name, email } = row;
+	const { name } = row;
 	return (
-		<Space direction="vertical" size={5} css={stySpace}>
+		<Space size={12}>
 			{" "}
-			<b css={styName}>{name}</b>
-			<span css={styEmail}>{email}</span>
+			<Avatar style={{ backgroundColor: "#BE596D", color: "#fff" }}>
+				M
+			</Avatar>
+			<span css={styName}>{name}</span>
 		</Space>
 	);
 };

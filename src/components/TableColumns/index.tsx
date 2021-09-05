@@ -5,7 +5,37 @@ import NameCol from "./components/NameCol";
 import PeriodeCol from "./components/PeriodeCol";
 import AudienceCol from "./components/AudienceCol";
 
-const TableColumns = () => {
+type TableColumnsArg = {
+	status?: boolean;
+	audience?: boolean;
+};
+
+const TableColumns = ({
+	status = true,
+	audience = true,
+}: TableColumnsArg = {}) => {
+	const activeStatus = status
+		? [
+				{
+					title: "Status",
+					dataIndex: "activityStatus",
+					key: "activityStatus",
+					render: (_, row) => <StatusCol row={row} />,
+				},
+		  ]
+		: [];
+
+	const activeAudience = audience
+		? [
+				{
+					title: "Dihadiri",
+					dataIndex: "audience",
+					width: 150,
+					key: "audience",
+					render: () => <AudienceCol />,
+				},
+		  ]
+		: [];
 	return [
 		{
 			title: "Name Kegiatan",
@@ -25,19 +55,8 @@ const TableColumns = () => {
 			key: "activityPlace",
 			render: (_, row) => <LocationCol row={row} />,
 		},
-		{
-			title: "Dihadiri",
-			dataIndex: "audience",
-			width: 150,
-			key: "audience",
-			render: () => <AudienceCol />,
-		},
-		{
-			title: "Status",
-			dataIndex: "activityStatus",
-			key: "activityStatus",
-			render: (_, row) => <StatusCol row={row} />,
-		},
+		...activeAudience,
+		...activeStatus,
 	];
 };
 

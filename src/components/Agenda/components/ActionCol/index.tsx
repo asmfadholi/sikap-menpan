@@ -1,5 +1,12 @@
 import React from "react";
-import { Space, Menu, message as messageNotif, Modal, Dropdown, Button } from "antd";
+import {
+	Space,
+	Menu,
+	message as messageNotif,
+	Modal,
+	Dropdown,
+	Button,
+} from "antd";
 import {
 	EditOutlined,
 	EllipsisOutlined,
@@ -29,15 +36,15 @@ const ActionCol = ({
 
 	const doDeleteActivity = async () => {
 		const { activityId = 0 } = row;
-		const { success } = await deleteActivity({ body: { activityId: Number(activityId) }});
+		const { success } = await deleteActivity({
+			body: { activityId: Number(activityId) },
+		});
 		if (success) {
 			messageNotif.success(
 				`Kegiatan "${row.activityName}" berhasil dihapus`,
-			)
+			);
 		} else {
-			messageNotif.error(
-				`Kegiatan "${row.activityName}" gagal dihapus`,
-			)
+			messageNotif.error(`Kegiatan "${row.activityName}" gagal dihapus`);
 		}
 		refetch();
 	};
@@ -58,7 +65,12 @@ const ActionCol = ({
 			</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key="1">
-				<Button danger type="link" onClick={handleOnDelete} loading={loading}>
+				<Button
+					danger
+					type="link"
+					onClick={handleOnDelete}
+					loading={loading}
+				>
 					<DeleteOutlined /> Hapus
 				</Button>
 			</Menu.Item>

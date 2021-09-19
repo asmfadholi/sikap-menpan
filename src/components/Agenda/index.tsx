@@ -33,6 +33,7 @@ const TableDashboard = () => {
 	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
 	const config = tableConfig({
+		refetch,
 		setData,
 		setMode,
 		setVisibleModal,

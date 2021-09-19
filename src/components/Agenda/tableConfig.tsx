@@ -4,6 +4,7 @@ import ActionCol from "./components/ActionCol";
 import TableColumns from "../TableColumns";
 
 const tableConfig = ({
+	refetch,
 	setMode,
 	setData,
 	setVisibleModal,
@@ -24,6 +25,7 @@ const tableConfig = ({
 			key: "action",
 			render: (_, row) => (
 				<ActionCol
+					refetch={refetch}
 					setMode={setMode}
 					setData={setData}
 					row={row}

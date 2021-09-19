@@ -32,7 +32,7 @@ const TableColumns = ({
 					dataIndex: "audience",
 					width: 150,
 					key: "audience",
-					render: () => <AudienceCol />,
+					render: (_, row) => <AudienceCol row={row} />,
 				},
 		  ]
 		: [];

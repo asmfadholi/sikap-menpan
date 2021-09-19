@@ -1,20 +1,25 @@
 import React from "react";
-import { Space, Menu, message, Modal, Dropdown, Button } from "antd";
+import { Space, Menu, message as messageNotif, Modal, Dropdown, Button } from "antd";
 import {
 	EditOutlined,
 	EllipsisOutlined,
 	DeleteOutlined,
 } from "@ant-design/icons";
 
+// hooks
+import { useActivityDelete } from "hooks/useActivityDelete";
+
 import { styIconElipsis, styEdit } from "./styles";
 
 const ActionCol = ({
+	refetch,
 	setMode,
 	setData,
 	row,
 	setVisibleModal,
 	setIsFirstModal,
 }) => {
+	const [deleteActivity, { loading }] = useActivityDelete();
 	const handleOnEdit = () => {
 		setMode("edit");
 		setData(row);
@@ -22,13 +27,25 @@ const ActionCol = ({
 		setIsFirstModal(false);
 	};
 
+	const doDeleteActivity = async () => {
+		const { activityId = 0 } = row;
+		const { success } = await deleteActivity({ body: { activityId: Number(activityId) }});
+		if (success) {
+			messageNotif.success(
+				`Kegiatan "${row.activityName}" berhasil dihapus`,
+			)
+		} else {
+			messageNotif.error(
+				`Kegiatan "${row.activityName}" gagal dihapus`,
+			)
+		}
+		refetch();
+	};
+
 	const handleOnDelete = () => {
 		Modal.confirm({
 			title: `Apakah kamu yakin ingin menghapus "${row.activityName}"?`,
-			onOk: () =>
-				message.success(
-					`Kegiatan "${row.activityName}" berhasil di hapus`,
-				),
+			onOk: async () => await doDeleteActivity(),
 		});
 	};
 
@@ -41,7 +58,7 @@ const ActionCol = ({
 			</Menu.Item>
 			<Menu.Divider />
 			<Menu.Item key="1">
-				<Button danger type="link" onClick={handleOnDelete}>
+				<Button danger type="link" onClick={handleOnDelete} loading={loading}>
 					<DeleteOutlined /> Hapus
 				</Button>
 			</Menu.Item>

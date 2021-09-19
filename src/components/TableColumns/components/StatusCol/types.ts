@@ -1,3 +1,6 @@
 export interface FunctionArg {
-	row: { activityStatus: string };
+	row: {
+		activityStatus: string;
+		activityStatusName: string;
+	};
 }

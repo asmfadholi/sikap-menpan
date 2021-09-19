@@ -6,8 +6,8 @@ import type { FunctionArg } from "./types";
 import { STATUS, COLOR } from "constants/status";
 
 const StatusCol: React.FC<FunctionArg> = ({ row }) => {
-	const { activityStatus = "" } = row;
-	return <Tag color={COLOR[activityStatus]}>{STATUS[activityStatus]}</Tag>;
+	const { activityStatusName = "", activityStatus = "" } = row;
+	return <Tag color={COLOR[activityStatus]}>{activityStatusName}</Tag>;
 };
 
 export default StatusCol;

@@ -9,15 +9,20 @@ import {
 	Col,
 	DatePicker,
 	message,
+	TimePicker,
 	Select,
 } from "antd";
 
 // hooks
 import { useActivityCreate } from "hooks/useActivityCreate";
 import { useActivityEdit } from "hooks/useActivityEdit";
+import { useUserList } from "hooks/useUserList";
 
 // types
 import { CreationModalInterface } from "./types";
+
+const normalizeDihadiriOptions = (arrData) =>
+	arrData.map(({ userName, userId }) => ({ value: userId, label: userName }));
 
 const sanitizeData = (data) => {
 	const {
@@ -26,6 +31,7 @@ const sanitizeData = (data) => {
 		activityTimeStart = "",
 		activityTimeEnd = "",
 		activityAction = "",
+		activityDihadiri = [],
 	} = data;
 	if (!activityDateStart || !activityDateEnd) return {};
 	const startDate = moment(`${activityDateStart} ${activityTimeStart}`);
@@ -35,6 +41,9 @@ const sanitizeData = (data) => {
 		activityAction: { value: activityAction },
 		startDate: String(startDate) === "Invalid date" ? null : startDate,
 		endDate: String(endDate) === "Invalid date" ? null : endDate,
+		startTime: String(startDate) === "Invalid date" ? null : startDate,
+		endTime: String(endDate) === "Invalid date" ? null : endDate,
+		activityDihadiri: normalizeDihadiriOptions(activityDihadiri),
 	};
 	return newData;
 };
@@ -45,11 +54,12 @@ const required = {
 };
 
 const normalizeRequest = (reqData) => {
-	const { activityAction, startDate, endDate, ...rest } = reqData;
+	const { activityAction, startDate, endDate, startTime, endTime, ...rest } =
+		reqData;
 	const activityDateStart = startDate.format("YYYY-MM-DD");
 	const activityDateEnd = endDate.format("YYYY-MM-DD");
-	const activityTimeStart = startDate.format("HH:mm:ss");
-	const activityTimeEnd = endDate.format("HH:mm:ss");
+	const activityTimeStart = startTime.format("HH:mm:ss");
+	const activityTimeEnd = endTime.format("HH:mm:ss");
 
 	return {
 		...rest,
@@ -68,6 +78,7 @@ const CreationModal = ({
 	data,
 	refetch,
 }: CreationModalInterface) => {
+	const { list } = useUserList();
 	const [createActivity, { loading: loadingCreate }]: any =
 		useActivityCreate();
 	const [editActivity, { loading: loadingEdit }]: any = useActivityEdit();
@@ -75,11 +86,7 @@ const CreationModal = ({
 	const isCreate = mode === "create";
 	const title = isCreate ? "Buat agenda" : "Edit agenda";
 
-	const handleOnFinish = async (res) => {
-		const body = normalizeRequest({
-			...res,
-			activityId: data.activityId || undefined,
-		});
+	const handleOnOk = async (body) => {
 		const { success } = isCreate
 			? await createActivity({ body })
 			: await editActivity({ body });
@@ -92,6 +99,26 @@ const CreationModal = ({
 		setVisible(false);
 	};
 
+	const handleOnFinish = (res) => {
+		const body = normalizeRequest({
+			...res,
+			activityId: data.activityId || undefined,
+		});
+		const { activityAction } = body;
+		const isDraft = activityAction === "1";
+		if (isDraft) {
+			handleOnOk(body);
+		} else {
+			Modal.confirm({
+				title: "Apa kamu yakin akan menugaskan kegiatan yang telah dibuat?",
+				content:
+					"Jika menugaskan kegiatan telah dibuat, maka akan muncul di halaman penugasan",
+				onOk: async () => await handleOnOk(body),
+				cancelText: "Tidak",
+			});
+		}
+	};
+
 	const onHandleCancel = () => {
 		form.resetFields();
 		setVisible(false);
@@ -101,7 +128,7 @@ const CreationModal = ({
 		<Modal
 			visible={visible}
 			title={title}
-			width={600}
+			width={1000}
 			onCancel={onHandleCancel}
 			footer={null}
 		>
@@ -126,8 +153,7 @@ const CreationModal = ({
 							name="startDate"
 						>
 							<DatePicker
-								showTime
-								format="DD-MMMM-YYYY HH:mm"
+								format="DD-MMMM-YYYY"
 								placeholder="Masukkan tanggal mulai"
 								style={{ width: "100%" }}
 							/>
@@ -140,9 +166,36 @@ const CreationModal = ({
 							name="endDate"
 						>
 							<DatePicker
-								showTime
-								format="DD-MMMM-YYYY HH:mm"
+								format="DD-MMMM-YYYY"
 								placeholder="Masukkan tanggal berakhir"
+								style={{ width: "100%" }}
+							/>
+						</Form.Item>
+					</Col>
+				</Row>
+				<Row gutter={16}>
+					<Col span={24} md={12}>
+						<Form.Item
+							label="Waktu mulai"
+							rules={[required]}
+							name="startTime"
+						>
+							<TimePicker
+								format="HH:mm"
+								placeholder="Masukkan waktu mulai"
+								style={{ width: "100%" }}
+							/>
+						</Form.Item>
+					</Col>
+					<Col span={24} md={12}>
+						<Form.Item
+							label="Waktu berakhir"
+							rules={[required]}
+							name="endTime"
+						>
+							<TimePicker
+								format="HH:mm"
+								placeholder="Masukkan waktu berakhir"
 								style={{ width: "100%" }}
 							/>
 						</Form.Item>
@@ -165,14 +218,29 @@ const CreationModal = ({
 				</Form.Item>
 
 				<Form.Item
+					label="Dihadiri"
+					rules={[required]}
+					name="activityDihadiri"
+				>
+					<Select
+						mode="multiple"
+						options={normalizeDihadiriOptions(list)}
+						placeholder="Pilih dihadiri"
+						allowClear
+						showArrow
+						labelInValue
+					/>
+				</Form.Item>
+
+				<Form.Item
 					label="Status"
 					rules={[required]}
 					name="activityAction"
 				>
 					<Select
 						options={[
-							{ value: "Diagendakan", label: "Diagendakan" },
-							{ value: "Menugaskan", label: "Menugaskan" },
+							{ value: "1", label: "Draft" },
+							{ value: "2", label: "Menugaskan" },
 						]}
 						placeholder="Pilih status"
 						allowClear

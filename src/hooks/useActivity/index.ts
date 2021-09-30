@@ -1,67 +1,59 @@
 import { useState, useEffect, useCallback } from "react";
 import { message as messageNotif } from "antd";
 import { fetcher, GET } from "helpers/fetcher";
+import type { UseActivityReturn } from "./types";
 
-const normalizeResponse = (res) => {
-	const { success, message } = res;
+const url = "/activities/list";
+const defaultParams = { limit: 10, page: 1, search: "" };
+const defaultData = { activities: [], start: 0, total: 0, errors: [] };
+const normalizeData = (objData) => {
+	const { data = {}, success = false, message = "" } = objData || {};
+	const { activities = [], start = 0, total_rows: total = 0 } = data;
+	const errors = [];
 	if (!success) {
-		messageNotif.error(message);
+		const errMessage = message || "Oops gagal memuat list kegiatan";
+		errors.push(errMessage);
+		messageNotif.error(errMessage);
 	}
+	return { activities, start, total, errors };
 };
 
-const URL = "/activities/list";
+const useActivity = (): UseActivityReturn => {
+	const [loading, setLoading] = useState(true);
+	const [params, setParams] = useState(defaultParams);
+	const [data, setData] = useState(defaultData);
 
-const useActivity = () => {
-	const [loading, setLoading] = useState<boolean>(true);
-	const [data, setData] = useState({ data: [] });
-	const [error, setError] = useState(null);
-
-	const getData = useCallback(async (params) => {
+	const getData = useCallback(async (requestData) => {
 		setLoading(true);
+		let newData;
 		try {
-			const res = await fetcher({
-				url: URL,
+			newData = await fetcher({
+				url,
 				method: GET,
 				body: {},
-				params,
+				params: requestData,
 			});
-			setData(res);
-			normalizeResponse(res);
 		} catch (err) {
-			setError(err.message);
-			const responseData = {
-				success: false,
-				message: err.message,
-				token: "",
-			};
-			normalizeResponse(responseData);
+			newData = err;
 		} finally {
 			setLoading(false);
+			const generateData = normalizeData(newData);
+			setData(generateData);
+			return generateData;
 		}
-
-		setLoading(false);
 	}, []);
 
 	useEffect(() => {
-		getData({});
+		getData(defaultParams);
 	}, []);
 
-	const handleOnSearch = (val = "") => {
-		const params = {
-			p: 1,
-			s: val,
-		};
-		getData(params);
+	const handleFilter = async (req) => {
+		const newParams = { ...params, ...req };
+		setParams(newParams);
+		return await getData(newParams);
 	};
 
-	return {
-		loading,
-		list: data?.data || [],
-		refetch: handleOnSearch,
-		total: 100,
-		page: 1,
-		error,
-	};
+	return { loading, handleFilter, params, data };
 };
 
 export { useActivity };

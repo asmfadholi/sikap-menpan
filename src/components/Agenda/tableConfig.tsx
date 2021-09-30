@@ -4,17 +4,21 @@ import ActionCol from "./components/ActionCol";
 import TableColumns from "../TableColumns";
 
 const tableConfig = ({
+	data,
 	refetch,
 	setMode,
 	setData,
 	setVisibleModal,
 	setIsFirstModal,
 }) => {
+	const { page, limit } = data;
 	const pagination = {
 		position: ["bottomRight"],
 		showQuickJumper: false,
 		showSizeChanger: true,
 		defaultCurrent: 1,
+		current: page,
+		pageSize: limit,
 	};
 
 	const columns = [

@@ -5,16 +5,21 @@ import ProtocolerCol from "./components/ProtocolerCol";
 import TableColumns from "../TableColumns";
 
 const tableConfig = ({
+	data,
 	setMode,
 	setData,
 	setVisibleModal,
 	setIsFirstModal,
 }) => {
+	const { page, limit, total } = data;
 	const pagination = {
 		position: ["bottomRight"],
 		showQuickJumper: false,
 		showSizeChanger: true,
 		defaultCurrent: 1,
+		current: page,
+		pageSize: limit,
+		total,
 	};
 
 	const columns = [

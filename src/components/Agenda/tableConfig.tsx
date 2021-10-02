@@ -11,7 +11,7 @@ const tableConfig = ({
 	setVisibleModal,
 	setIsFirstModal,
 }) => {
-	const { page, limit } = data;
+	const { page, limit, total } = data;
 	const pagination = {
 		position: ["bottomRight"],
 		showQuickJumper: false,
@@ -19,6 +19,7 @@ const tableConfig = ({
 		defaultCurrent: 1,
 		current: page,
 		pageSize: limit,
+		total,
 	};
 
 	const columns = [

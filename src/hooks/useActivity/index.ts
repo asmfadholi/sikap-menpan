@@ -8,7 +8,7 @@ const defaultParams = { limit: 10, page: 1, search: "" };
 const defaultData = { activities: [], start: 0, total: 0, errors: [] };
 const normalizeData = (objData) => {
 	const { data = {}, success = false, message = "" } = objData || {};
-	const { activities = [], start = 0, total_rows: total = 0 } = data;
+	const { activities = [], start = 0, total_data: total = 0 } = data;
 	const errors = [];
 	if (!success) {
 		const errMessage = message || "Oops gagal memuat list kegiatan";

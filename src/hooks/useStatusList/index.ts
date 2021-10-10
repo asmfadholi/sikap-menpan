@@ -1,24 +1,29 @@
 import { useState, useEffect, useCallback } from "react";
 import { message as messageNotif } from "antd";
 import { fetcher, GET } from "helpers/fetcher";
-import type { UseActivityReturn } from "./types";
 
-const url = "/activities/list";
-const defaultParams = { limit: 10, page: 1, search: "" };
-const defaultData = { activities: [], start: 0, total: 0, errors: [] };
+const url = "/Activities/status";
+const defaultParams = { flag: 0 };
+const defaultData = { list: [], errors: [] };
 const normalizeData = (objData) => {
-	const { data = {}, success = false, message = "" } = objData || {};
-	const { activities = [], start = 0, total_data: total = 0 } = data;
+	const { data = [], success = false, message = "" } = objData || {};
 	const errors = [];
 	if (!success) {
-		const errMessage = message || "Oops gagal memuat list kegiatan";
+		const errMessage = message || "Oops gagal memuat list";
 		errors.push(errMessage);
 		messageNotif.error(errMessage);
 	}
-	return { activities, start, total, errors };
+	const listData = data.map(({ idStatus, Status }) => ({
+		value: idStatus,
+		label: Status,
+	}));
+	return {
+		list: listData,
+		errors,
+	};
 };
 
-const useActivity = (init = {}): UseActivityReturn => {
+const useStatusList = (init = {}): any => {
 	const [loading, setLoading] = useState(true);
 	const [params, setParams] = useState({ ...defaultParams, ...init });
 	const [data, setData] = useState(defaultData);
@@ -56,4 +61,4 @@ const useActivity = (init = {}): UseActivityReturn => {
 	return { loading, handleFilter, params, data };
 };
 
-export { useActivity };
+export { useStatusList };

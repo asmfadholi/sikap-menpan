@@ -91,8 +91,11 @@ const CreationModal = ({
 				>
 					<Select
 						options={[
-							{ value: "Draft", label: "Draft" },
-							{ value: "Tugaskan", label: "Tugaskan" },
+							{
+								value: "Draft Menugaskan",
+								label: "Draft Menugaskan",
+							},
+							{ value: "Menugaskan", label: "Menugaskan" },
 						]}
 						placeholder="Pilih status"
 						allowClear

@@ -17,6 +17,7 @@ import {
 import { useActivityCreate } from "hooks/useActivityCreate";
 import { useActivityEdit } from "hooks/useActivityEdit";
 import { useUserList } from "hooks/useUserList";
+import { useStatusList } from "hooks/useStatusList";
 
 // types
 import { CreationModalInterface } from "./types";
@@ -54,12 +55,20 @@ const required = {
 };
 
 const normalizeRequest = (reqData) => {
-	const { activityAction, startDate, endDate, startTime, endTime, ...rest } =
-		reqData;
+	const {
+		activityAction,
+		startDate,
+		endDate,
+		startTime,
+		endTime,
+		activityDihadiri,
+		...rest
+	} = reqData;
 	const activityDateStart = startDate.format("YYYY-MM-DD");
 	const activityDateEnd = endDate.format("YYYY-MM-DD");
 	const activityTimeStart = startTime.format("HH:mm:ss");
 	const activityTimeEnd = endTime.format("HH:mm:ss");
+	const activityDihadiriNorm = activityDihadiri.map(({ value }) => value);
 
 	return {
 		...rest,
@@ -67,6 +76,7 @@ const normalizeRequest = (reqData) => {
 		activityDateEnd,
 		activityTimeStart,
 		activityTimeEnd,
+		activityDihadiri: activityDihadiriNorm,
 		activityAction: activityAction.value,
 	};
 };
@@ -81,10 +91,12 @@ const CreationModal = ({
 	const { list } = useUserList();
 	const [createActivity, { loading: loadingCreate }]: any =
 		useActivityCreate();
+	const { data: dataStatus } = useStatusList({ flag: 1 });
+	const { list: listStatus } = dataStatus;
 	const [editActivity, { loading: loadingEdit }]: any = useActivityEdit();
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
-	const title = isCreate ? "Buat agenda" : "Edit agenda";
+	const title = isCreate ? "Buat kegiatan" : "Edit kegiatan";
 
 	const handleOnOk = async (body) => {
 		const { success } = isCreate
@@ -92,7 +104,7 @@ const CreationModal = ({
 			: await editActivity({ body });
 		if (success) {
 			message.success(
-				`Berhasil ${isCreate ? "membuat" : "update"} agenda`,
+				`Berhasil ${isCreate ? "membuat" : "update"} kegiatan`,
 			);
 			refetch({});
 		}
@@ -238,10 +250,7 @@ const CreationModal = ({
 					name="activityAction"
 				>
 					<Select
-						options={[
-							{ value: "1", label: "Draft" },
-							{ value: "2", label: "Menugaskan" },
-						]}
+						options={listStatus}
 						placeholder="Pilih status"
 						allowClear
 						showArrow

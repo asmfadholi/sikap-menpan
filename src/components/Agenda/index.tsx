@@ -27,7 +27,12 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const { loading, data: responseData, handleFilter, params } = useActivity();
+	const {
+		loading,
+		data: responseData,
+		handleFilter,
+		params,
+	} = useActivity({ status: "Draft" });
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
@@ -131,7 +136,7 @@ const TableDashboard = () => {
 				<CreationModal
 					data={data}
 					mode={mode}
-					refetch={() => handleOnSearch({})}
+					refetch={handleFilter}
 					visible={visibleModal}
 					setVisible={setVisibleModal}
 				/>

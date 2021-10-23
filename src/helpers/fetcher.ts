@@ -37,7 +37,9 @@ const fetcher = ({ body, method, url, params }) => {
 	if (method === POST) {
 		return api.post(url, body).then((res) => res.data);
 	} else if (method === GET) {
-		const qs = new URLSearchParams(params);
+		const qs = Object.keys(params)
+			.map((key) => key + "=" + params[key])
+			.join("&");
 		return api.get(`${url}?${qs}`).then((res) => res.data);
 	}
 };

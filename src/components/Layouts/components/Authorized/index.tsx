@@ -170,7 +170,10 @@ const Authorized = ({ children }) => {
 									<Space align="center">
 										<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
 
-										<div className="name">Amir Hamzah</div>
+										<div className="name">
+											<div>Amir Hamzah</div>
+											<div>email@gmail.com</div>
+										</div>
 
 										<DownOutlined className="icon-style" />
 									</Space>

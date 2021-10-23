@@ -13,7 +13,13 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const { loading, data: responseData, handleFilter, params } = useActivity();
+	const init = { status: "Menugaskan,Draft.Menugaskan" };
+	const {
+		loading,
+		data: responseData,
+		handleFilter,
+		params,
+	} = useActivity(init);
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
@@ -35,9 +41,14 @@ const TableDashboard = () => {
 	const propsDataTable = {
 		rowKey: "id",
 		loading,
+		onChange: handleOnChange,
 		dataSource,
 		...config,
 	} as TableProps<any>;
+
+	const handleOnSearch = (val) => {
+		handleFilter({ search: val, page: 1, limit: 10 });
+	};
 
 	return (
 		<div style={{ minHeight: "100vh" }}>
@@ -49,7 +60,7 @@ const TableDashboard = () => {
 			<Input.Search
 				placeholder="Cari kegiatan..."
 				style={{ maxWidth: "350px", marginBottom: "16px" }}
-				onSearch={handleOnChange}
+				onSearch={handleOnSearch}
 			/>
 			<br />
 			<Table {...propsDataTable} />

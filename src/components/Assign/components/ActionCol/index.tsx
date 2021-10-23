@@ -10,7 +10,13 @@ const ActionCol = ({
 	setIsFirstModal,
 }) => {
 	const handleOnEdit = () => {
-		setMode("edit");
+		const { activityAction = 0 } = row;
+		const isActionDraftMenugaskan = Number(activityAction) === 3;
+		if (isActionDraftMenugaskan) {
+			setMode("edit");
+		} else {
+			setMode("create");
+		}
 		setData(row);
 		setVisibleModal(true);
 		setIsFirstModal(false);

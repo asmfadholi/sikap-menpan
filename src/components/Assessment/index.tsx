@@ -14,7 +14,13 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const { loading, data: responseData, handleFilter, params } = useActivity();
+	const init = { status: "Ditugaskan" };
+	const {
+		loading,
+		data: responseData,
+		handleFilter,
+		params,
+	} = useActivity(init);
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");

@@ -1,28 +1,18 @@
 import React from "react";
-import moment from "moment";
 import { Modal, Form, Button, message, Select } from "antd";
 
-interface CreationModalInterface {
-	visible: boolean;
-	setVisible: (arg: boolean) => void;
-	mode: string;
-	data?: {
-		name?: string;
-		location?: string;
-		detail?: string;
-		description?: string;
-		startDate?: string;
-		endDate?: string;
-	};
-}
+import { useStatusList } from "hooks/useStatusList";
+import { useUserByRoleList } from "hooks/useUserByRoleList";
+import { useAddProtocolerInActivity } from "hooks/useAddProtocolerInActivity";
+
+const normalizeProtocolerOptions = (arrData) =>
+	arrData.map(({ userName, userId }) => ({ value: userId, label: userName }));
 
 const sanitizeData = (data) => {
-	const { startDate = "", endDate = "" } = data;
-	if (!startDate || !endDate) return {};
+	const { activityAction = "" } = data;
 	const newData = {
 		...data,
-		startDate: moment(startDate),
-		endDate: moment(endDate),
+		activityAction: { value: String(activityAction) },
 	};
 	return newData;
 };
@@ -32,18 +22,29 @@ const required = {
 	message: "Wajib diisi",
 };
 
-const CreationModal = ({
-	visible,
-	setVisible,
-	mode,
-	data,
-}: CreationModalInterface) => {
+const CreationModal = ({ visible, setVisible, mode, data }: any) => {
+	const { list: listUser } = useUserByRoleList({ role: 3 });
+	const { data: dataStatus } = useStatusList({ flag: 2 });
+	const [addProtocoler] = useAddProtocolerInActivity();
+	const { list: listStatus } = dataStatus;
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
-	const title = `Tugaskan di kegiatan ${data.name}`;
+	const title = `Tugaskan di kegiatan ${data.activityName}`;
 
 	const handleOnFinish = async () => {
-		message.success(`Berhasil Menugaskan`);
+		const { activityId } = data;
+		const { protocols, activityAction } = form.getFieldsValue();
+		const body = {
+			userIds: protocols.map(({ value }) => value).join(","),
+			activityId,
+			activityAction: activityAction?.value,
+		};
+		const { success } = await addProtocoler({ body });
+		if (success) {
+			message.success(
+				`Berhasil ${isCreate ? "membuat draft" : ""} Menugaskan`,
+			);
+		}
 		setVisible(false);
 	};
 
@@ -51,6 +52,8 @@ const CreationModal = ({
 		form.resetFields();
 		setVisible(false);
 	};
+
+	console.log(sanitizeData(data));
 
 	return (
 		<Modal
@@ -73,10 +76,7 @@ const CreationModal = ({
 				>
 					<Select
 						mode="multiple"
-						options={[
-							{ value: "pro 1", label: "pro 1" },
-							{ value: "pro 2", label: "pro 2" },
-						]}
+						options={normalizeProtocolerOptions(listUser)}
 						placeholder="Pilih protokol"
 						allowClear
 						showArrow
@@ -87,16 +87,10 @@ const CreationModal = ({
 				<Form.Item
 					label="Status"
 					rules={[required]}
-					name="statusProtocol"
+					name="activityAction"
 				>
 					<Select
-						options={[
-							{
-								value: "Draft Menugaskan",
-								label: "Draft Menugaskan",
-							},
-							{ value: "Menugaskan", label: "Menugaskan" },
-						]}
+						options={listStatus}
 						placeholder="Pilih status"
 						allowClear
 						showArrow

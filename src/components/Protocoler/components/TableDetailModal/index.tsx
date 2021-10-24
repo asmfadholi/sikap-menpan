@@ -29,7 +29,7 @@ const TableDetailModal = ({
 			onCancel={onHandleCancel}
 			footer={null}
 		>
-			<TableDetail list={data.detail} />
+			<TableDetail data={data} />
 		</Modal>
 	);
 };

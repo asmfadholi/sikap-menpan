@@ -1,18 +1,21 @@
 import React from "react";
 import { Table } from "antd";
 import { TableProps } from "antd/lib/table";
+import { useProtocolarActivityList } from "hooks/useProtocolarActivityList";
 
 // connfiguration
 import tableConfig from "./tableConfig";
 
-const TableDashboard = ({ list }) => {
+const TableDashboard = ({ data }) => {
+	const init = { userId: data.userId };
+	const { data: responseData, loading } = useProtocolarActivityList(init);
+	const { list } = responseData;
 	const config = tableConfig();
 
 	const propsDataTable = {
 		rowKey: "id",
-		loading: false,
+		loading,
 		dataSource: list,
-		// onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 

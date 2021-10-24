@@ -5,9 +5,7 @@ import dynamic from "next/dynamic";
 
 // connfiguration
 import tableConfig from "./tableConfig";
-
-// mocks
-import { LIST } from "./__mocks_data__/list";
+import { useProtocolarAssessmentList } from "hooks/useProtocolarAssessmentList";
 
 // components
 const TableDetailModal = dynamic(import("./components/TableDetailModal"));
@@ -16,6 +14,9 @@ const TableDetailModal = dynamic(import("./components/TableDetailModal"));
 import { styTable } from "./styles";
 
 const TableDashboard = () => {
+	const init = { limit: 10, page: 1 };
+	const { data: responseData } = useProtocolarAssessmentList(init);
+	const { list: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [data, setData] = useState({});
 	const [isFirstModal, setIsFirstModal] = useState(true);
@@ -28,7 +29,7 @@ const TableDashboard = () => {
 	const propsDataTable = {
 		rowKey: "id",
 		loading: false,
-		dataSource: LIST,
+		dataSource,
 		...config,
 	} as TableProps<any>;
 

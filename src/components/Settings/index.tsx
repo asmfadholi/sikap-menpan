@@ -19,7 +19,8 @@ const isUserByRole = () => {
 
 const TableDashboard = () => {
 	const init = { page: 1, limit: 10 };
-	const { loading, list, handleFilter, params }: any = isUserByRole()
+	const isUserByRoleAccess = isUserByRole();
+	const { loading, list, handleFilter, params }: any = isUserByRoleAccess
 		? useUserListByRole(init)
 		: useUserList(init);
 	const [visibleModal, setVisibleModal] = useState(false);
@@ -66,11 +67,13 @@ const TableDashboard = () => {
 
 			<Row gutter={[16, 16]}>
 				<Col span={24} lg={12}>
-					<Input.Search
-						placeholder="Cari user disini..."
-						style={{ maxWidth: "350px" }}
-						onSearch={handleOnSearch}
-					/>
+					{!isUserByRoleAccess && (
+						<Input.Search
+							placeholder="Cari user disini..."
+							style={{ maxWidth: "350px" }}
+							onSearch={handleOnSearch}
+						/>
+					)}
 				</Col>
 				<Col
 					span={24}
@@ -78,13 +81,15 @@ const TableDashboard = () => {
 					style={{ display: "flex", justifyContent: "flex-end" }}
 				>
 					<Space size={16} wrap style={{ marginBottom: "12px" }}>
-						<Button
-							type="primary"
-							style={{ width: "100%" }}
-							onClick={handleClickNew}
-						>
-							Buat User Baru
-						</Button>
+						{!isUserByRoleAccess && (
+							<Button
+								type="primary"
+								style={{ width: "100%" }}
+								onClick={handleClickNew}
+							>
+								Buat User Baru
+							</Button>
+						)}
 					</Space>
 				</Col>
 			</Row>

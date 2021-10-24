@@ -48,6 +48,12 @@ const generateMenu = ({ name, key, icon: Icon }: generateMenuInterface) => {
 	);
 };
 
+const validateMenuByRole = () => {
+	const roleId = Number(localStorage.getItem("roleId"));
+	const filterMenu = configMenu.filter(({ roles }) => roles.includes(roleId));
+	return filterMenu.map(generateMenu);
+};
+
 const getUserName = () => localStorage.getItem("userName");
 const getUserEmail = () => localStorage.getItem("userEmail");
 
@@ -126,7 +132,7 @@ const Authorized = ({ children }) => {
 							selectedKeys={selectedKeys}
 							onSelect={handleSelect}
 						>
-							{configMenu.map(generateMenu)}
+							{validateMenuByRole()}
 						</Menu>
 					</Sider>
 				</Col>
@@ -160,14 +166,6 @@ const Authorized = ({ children }) => {
 							</Menu>
 						</Col>
 						<Col span={12} className="menu-account">
-							{/* <Button
-								danger
-								type="link"
-								css={styLogout}
-								onClick={handleLogout}
-							>
-								Logout <LogoutOutlined />
-							</Button> */}
 							<Dropdown overlay={menu} trigger={["click"]}>
 								<div className="wrapper">
 									<Space align="center">

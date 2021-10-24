@@ -4,14 +4,15 @@ import { Space, Avatar } from "antd";
 import { styName } from "./styles";
 
 const NameCol = ({ row }) => {
-	const { name } = row;
+	const { userName } = row;
+	const shortName = userName[0].toUpperCase();
 	return (
 		<Space size={12}>
 			{" "}
 			<Avatar style={{ backgroundColor: "#BE596D", color: "#fff" }}>
-				M
+				{shortName}
 			</Avatar>
-			<span css={styName}>{name}</span>
+			<span css={styName}>{userName}</span>
 		</Space>
 	);
 };

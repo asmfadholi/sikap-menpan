@@ -16,8 +16,13 @@ const tableConfig = () => {
 			title: "Nilai",
 			dataIndex: "rating",
 			key: "rating",
-			render: (_, { rating }) => (
-				<RateCol row={{ meanRating: rating, maxRating: 5 }} />
+			render: (_, { reviewRate }) => (
+				<RateCol
+					row={{
+						average: Number(reviewRate).toFixed(1),
+						maxRating: 5,
+					}}
+				/>
 			),
 		},
 	];

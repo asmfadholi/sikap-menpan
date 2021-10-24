@@ -1,18 +1,18 @@
 import React from "react";
 import { Space, Rate, Tag } from "antd";
+import { RATING } from "constants/status";
+import { RATING_COLOR } from "constants/status";
 
 const RateCol = ({ row }) => {
-	const { maxRating, meanRating } = row;
+	const { average } = row;
+	const indexRate = Number(average).toFixed(0);
 	return (
 		<Space size={26} wrap>
 			<Space size={4} wrap>
 				{" "}
-				<Rate disabled value={meanRating} allowHalf />
-				<span>
-					{meanRating}/{maxRating}
-				</span>
+				<Rate disabled value={average} allowHalf />
 			</Space>
-			<Tag color="green">Cukup Baik </Tag>
+			<Tag color={RATING_COLOR[indexRate]}>{RATING[indexRate]}</Tag>
 		</Space>
 	);
 };

@@ -49,7 +49,7 @@ const UploadImage = ({ onChange }) => {
 				onPreview={handlePreview}
 				onChange={handleChange}
 			>
-				{fileList.length >= 8 ? null : uploadButton}
+				{fileList.length >= 1 ? null : uploadButton}
 			</Upload>
 			<Modal
 				visible={previewVisible}

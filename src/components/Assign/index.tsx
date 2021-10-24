@@ -66,7 +66,7 @@ const TableDashboard = () => {
 			<Table {...propsDataTable} />
 			{visibleModal && !isFirstModal && (
 				<CreationModal
-					data={data}
+					data={{ ...data, handleFilter }}
 					mode={mode}
 					visible={visibleModal}
 					setVisible={setVisibleModal}

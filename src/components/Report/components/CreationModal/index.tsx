@@ -1,23 +1,10 @@
 import React from "react";
 import moment from "moment";
 import { Modal, Form, Button, message, Input } from "antd";
+import { useReportActivity } from "hooks/useReportActivity";
 
 // components
 import UploadImage from "../Upload";
-
-interface CreationModalInterface {
-	visible: boolean;
-	setVisible: (arg: boolean) => void;
-	mode: string;
-	data?: {
-		name?: string;
-		location?: string;
-		detail?: string;
-		description?: string;
-		startDate?: string;
-		endDate?: string;
-	};
-}
 
 const sanitizeData = (data) => {
 	const { startDate = "", endDate = "" } = data;
@@ -35,18 +22,25 @@ const required = {
 	message: "Wajib diisi",
 };
 
-const CreationModal = ({
-	visible,
-	setVisible,
-	mode,
-	data,
-}: CreationModalInterface) => {
+const CreationModal = ({ visible, setVisible, mode, data }: any) => {
+	const { activityName = "", activityId = "", handleFilter } = data;
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
-	const title = `Laporan kegiatan ${data.name}`;
+	const title = `Laporan kegiatan ${activityName}`;
+	const [reportActivity, { loading }] = useReportActivity();
 
-	const handleOnFinish = async () => {
-		message.success(`Berhasil Melaporkan`);
+	const handleOnFinish = async (val) => {
+		const { uploadImage = [], catatan } = val;
+		const { originFileObj } = uploadImage?.[0] || {};
+		const body = new FormData();
+		body.append("activityId", activityId);
+		body.append("reportUrl", originFileObj);
+		body.append("reportDescription", catatan);
+		const { success } = reportActivity({ body });
+		if (success) {
+			message.success("Berhasil Melaporkan");
+			handleFilter();
+		}
 		setVisible(false);
 	};
 
@@ -73,10 +67,6 @@ const CreationModal = ({
 				initialValues={!isCreate ? sanitizeData(data) : {}}
 				onFinish={handleOnFinish}
 			>
-				<Form.Item label="Catatan" rules={[required]} name="catatan">
-					<Input.TextArea placeholder="Masukkan catatan" />
-				</Form.Item>
-
 				<Form.Item
 					label="Dokumentasi"
 					rules={[required]}
@@ -85,12 +75,17 @@ const CreationModal = ({
 					<UploadImage onChange={handleOnChangeUpload} />
 				</Form.Item>
 
+				<Form.Item label="Catatan" rules={[required]} name="catatan">
+					<Input.TextArea placeholder="Masukkan catatan" />
+				</Form.Item>
+
 				<Form.Item noStyle shouldUpdate>
 					{() => {
 						return (
 							<Button
 								type="primary"
 								htmlType="submit"
+								loading={loading}
 								style={{ width: "100%" }}
 							>
 								Simpan

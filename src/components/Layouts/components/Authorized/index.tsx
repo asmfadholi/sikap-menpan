@@ -48,6 +48,9 @@ const generateMenu = ({ name, key, icon: Icon }: generateMenuInterface) => {
 	);
 };
 
+const getUserName = () => localStorage.getItem("userName");
+const getUserEmail = () => localStorage.getItem("userEmail");
+
 const Authorized = ({ children }) => {
 	const { replace, push, pathname, events } = useRouter();
 	const { dispatch } = useAuthStates();
@@ -171,8 +174,8 @@ const Authorized = ({ children }) => {
 										<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
 
 										<div className="name">
-											<div>Amir Hamzah</div>
-											<div>email@gmail.com</div>
+											<div>{getUserName()}</div>
+											<div>{getUserEmail()}</div>
 										</div>
 
 										<DownOutlined className="icon-style" />

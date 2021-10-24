@@ -14,7 +14,7 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const init = { status: "Ditugaskan" };
+	const init = { status: "Ditugaskan", page: 1, limit: 10 };
 	const {
 		loading,
 		data: responseData,

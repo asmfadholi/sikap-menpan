@@ -10,20 +10,6 @@ import {
 	InputNumber,
 } from "antd";
 
-interface CreationModalInterface {
-	visible: boolean;
-	setVisible: (arg: boolean) => void;
-	mode: string;
-	data?: {
-		name?: string;
-		location?: string;
-		detail?: string;
-		description?: string;
-		startDate?: string;
-		endDate?: string;
-	};
-}
-
 const { Panel } = Collapse;
 
 const sanitizeData = (data) => {
@@ -42,15 +28,11 @@ const required = {
 	message: "Wajib diisi",
 };
 
-const CreationModal = ({
-	visible,
-	setVisible,
-	mode,
-	data,
-}: CreationModalInterface) => {
+const CreationModal = ({ visible, setVisible, mode, data }: any) => {
+	const { Protocolers = [], activityName = "" } = data;
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
-	const title = `Penilaian Protokoler di kegiatan ${data.name}`;
+	const title = `Penilaian Protokoler di kegiatan ${activityName}`;
 
 	const handleOnFinish = async () => {
 		message.success(`Berhasil Memberikan penilaian`);
@@ -76,38 +58,33 @@ const CreationModal = ({
 				initialValues={!isCreate ? sanitizeData(data) : {}}
 				onFinish={handleOnFinish}
 			>
-				<Collapse defaultActiveKey={["1"]}>
-					<Panel header="Protokoler 1 (Andi Rahman)" key="1">
-						<Form.Item
-							label="Penilaian"
-							rules={[required]}
-							name="rate1"
-						>
-							<InputNumber
-								style={{ width: "100%" }}
-								placeholder="Masukkan nilai dari 1-10"
-							/>
-						</Form.Item>
-						<Form.Item label="Catatan" name="catatan1">
-							<Input.TextArea placeholder="Masukkan catatan" />
-						</Form.Item>
-					</Panel>
-					<Panel header="Protokoler 2 (Andi Iman)" key="2">
-						<Form.Item
-							label="Penilaian"
-							rules={[required]}
-							name="rate2"
-						>
-							<InputNumber
-								style={{ width: "100%" }}
-								placeholder="Masukkan nilai dari 1-10"
-							/>
-						</Form.Item>
-						<Form.Item label="Catatan" name="catatan2">
-							<Input.TextArea placeholder="Masukkan catatan" />
-						</Form.Item>
-					</Panel>
+				<Collapse defaultActiveKey={[]}>
+					{Protocolers.map((protocol, idx) => {
+						const { userName = "", userId } = protocol;
+						return (
+							<Panel
+								header={`Protokoler ${idx + 1} (${userName})`}
+								key={userId}
+							>
+								<Form.Item
+									label="Penilaian"
+									rules={[required]}
+									name="rate1"
+								>
+									<InputNumber
+										style={{ width: "100%" }}
+										placeholder="Masukkan nilai dari 1-10"
+									/>
+								</Form.Item>
+								<Form.Item label="Catatan" name="catatan1">
+									<Input.TextArea placeholder="Masukkan catatan" />
+								</Form.Item>
+							</Panel>
+						);
+					})}
 				</Collapse>
+
+				<br />
 
 				<Form.Item noStyle shouldUpdate>
 					{() => {

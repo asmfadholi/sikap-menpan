@@ -26,13 +26,18 @@ const Login = () => {
 	const { push, events } = useRouter();
 
 	const handleFinish = async (body: RequestBody) => {
-		const { token, success, userEmail } = await handleLogin({ body });
+		const { token, success, userEmail, userName, roleId } =
+			await handleLogin({
+				body,
+			});
 		if (success) {
 			dispatch({ type: "login" });
+			localStorage.setItem("userEmail", userEmail);
+			localStorage.setItem("userName", userName);
+			localStorage.setItem("roleId", roleId);
 			events.on("routeChangeComplete", () => {
 				NProgress.done();
 				localStorage.setItem("auth", token);
-				localStorage.setItem("userEmail", userEmail);
 			});
 			message.success("Berhasil Login");
 			push("/");

@@ -2,25 +2,22 @@ import { useState } from "react";
 import { message as messageNotif } from "antd";
 import { fetcher, POST } from "helpers/fetcher";
 
-// types
-import { HandleLoginFunc } from "./types";
-
 const normalizeResponse = (res) => {
-	const { success, token, message, userEmail, userName, roleId } = res;
+	const { success, message } = res;
 	if (!success) {
 		messageNotif.error(message);
 	}
-	return { success, message, token, userEmail, userName, roleId };
+	return { success, message };
 };
 
-const URL = "/auth/login";
+const URL = "/activities/activity_report";
 
-const useLogin = () => {
+const useReportActivity = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [data, setData] = useState(null);
 	const [error, setError] = useState(null);
 
-	const handleMutate: HandleLoginFunc = async ({ body }) => {
+	const handleMutate: any = async ({ body }) => {
 		let responseData = {};
 		try {
 			setLoading(true);
@@ -49,4 +46,4 @@ const useLogin = () => {
 	return [handleMutate, { data, loading, error }];
 };
 
-export { useLogin };
+export { useReportActivity };

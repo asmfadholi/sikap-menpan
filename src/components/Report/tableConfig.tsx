@@ -28,7 +28,7 @@ const tableConfig = ({
 			title: "Protokoler",
 			dataIndex: "protocoler",
 			key: "protocoler",
-			render: () => <ProtocolerCol />,
+			render: (_, row) => <ProtocolerCol row={row} />,
 		},
 		{
 			title: "Action",

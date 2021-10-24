@@ -9,10 +9,11 @@ const normalizeProtocolerOptions = (arrData) =>
 	arrData.map(({ userName, userId }) => ({ value: userId, label: userName }));
 
 const sanitizeData = (data) => {
-	const { activityAction = "" } = data;
+	const { activityAction = "", Protocolers = [] } = data;
 	const newData = {
 		...data,
 		activityAction: { value: String(activityAction) },
+		protocols: normalizeProtocolerOptions(Protocolers),
 	};
 	return newData;
 };
@@ -32,7 +33,7 @@ const CreationModal = ({ visible, setVisible, mode, data }: any) => {
 	const title = `Tugaskan di kegiatan ${data.activityName}`;
 
 	const handleOnFinish = async () => {
-		const { activityId } = data;
+		const { activityId, handleFilter } = data;
 		const { protocols, activityAction } = form.getFieldsValue();
 		const body = {
 			userIds: protocols.map(({ value }) => value).join(","),
@@ -44,6 +45,7 @@ const CreationModal = ({ visible, setVisible, mode, data }: any) => {
 			message.success(
 				`Berhasil ${isCreate ? "membuat draft" : ""} Menugaskan`,
 			);
+			handleFilter();
 		}
 		setVisible(false);
 	};

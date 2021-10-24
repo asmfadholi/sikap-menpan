@@ -28,13 +28,13 @@ export default [
 		icon: ContactsOutlined,
 	},
 	{
-		roles: [3],
+		roles: [1, 3],
 		name: "Lapor",
 		key: "/report",
 		icon: FileOutlined,
 	},
 	{
-		roles: [4, 5, 6],
+		roles: [1, 4, 5, 6],
 		name: "Penilaian",
 		key: "/assessment",
 		icon: FileDoneOutlined,

@@ -9,6 +9,7 @@ import {
 	message,
 	InputNumber,
 } from "antd";
+import { useAssessProtocol } from "hooks/useAssessProtocol";
 
 const { Panel } = Collapse;
 
@@ -28,14 +29,34 @@ const required = {
 	message: "Wajib diisi",
 };
 
-const CreationModal = ({ visible, setVisible, mode, data }: any) => {
+const CreationModal = ({ visible, setVisible, mode, data, refetch }: any) => {
 	const { Protocolers = [], activityName = "" } = data;
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
+	const [assessProtocolar] = useAssessProtocol();
 	const title = `Penilaian Protokoler di kegiatan ${activityName}`;
 
-	const handleOnFinish = async () => {
-		message.success(`Berhasil Memberikan penilaian`);
+	const handleOnFinish = async (val) => {
+		const { activityId } = data;
+
+		const body = Protocolers.map((protocol) => {
+			const { userId } = protocol;
+			const reviewRate = val[`reviewRate${userId}`];
+			const reviewDescription = val[`reviewDescription${userId}`];
+			return {
+				activityId,
+				reviewRate,
+				reviewDescription,
+				reviewTypeId: 1,
+				userId,
+			};
+		});
+		setVisible(false);
+		const { success } = await assessProtocolar({ body });
+		if (success) {
+			message.success("Berhasil Memberikan penilaian");
+			refetch({});
+		}
 		setVisible(false);
 	};
 
@@ -69,14 +90,17 @@ const CreationModal = ({ visible, setVisible, mode, data }: any) => {
 								<Form.Item
 									label="Penilaian"
 									rules={[required]}
-									name="rate1"
+									name={`reviewRate${userId}`}
 								>
 									<InputNumber
 										style={{ width: "100%" }}
 										placeholder="Masukkan nilai dari 1-10"
 									/>
 								</Form.Item>
-								<Form.Item label="Catatan" name="catatan1">
+								<Form.Item
+									label="Catatan"
+									name={`reviewDescription${userId}`}
+								>
 									<Input.TextArea placeholder="Masukkan catatan" />
 								</Form.Item>
 							</Panel>

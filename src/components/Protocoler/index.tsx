@@ -15,7 +15,11 @@ import { styTable } from "./styles";
 
 const TableDashboard = () => {
 	const init = { limit: 10, page: 1 };
-	const { data: responseData } = useProtocolarAssessmentList(init);
+	const {
+		data: responseData,
+		handleFilter,
+		params,
+	} = useProtocolarAssessmentList(init);
 	const { list: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [data, setData] = useState({});
@@ -26,10 +30,20 @@ const TableDashboard = () => {
 		setIsFirstModal,
 	});
 
+	const handleOnChange = (val) => {
+		const { current: page, pageSize: limit } = val;
+		handleFilter({ ...params, page, limit });
+	};
+
+	const handleOnSearch = (val) => {
+		handleFilter({ search: val, page: 1, limit: 10 });
+	};
+
 	const propsDataTable = {
 		rowKey: "id",
 		loading: false,
 		dataSource,
+		onChange: handleOnChange,
 		...config,
 	} as TableProps<any>;
 
@@ -43,6 +57,7 @@ const TableDashboard = () => {
 			<Input.Search
 				placeholder="Cari protokoler di sini..."
 				style={{ maxWidth: "350px", marginBottom: "16px" }}
+				onSearch={handleOnSearch}
 			/>
 			<br />
 			<Table {...propsDataTable} css={styTable} />

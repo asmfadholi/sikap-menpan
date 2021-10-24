@@ -55,8 +55,6 @@ const CreationModal = ({ visible, setVisible, mode, data }: any) => {
 		setVisible(false);
 	};
 
-	console.log(sanitizeData(data));
-
 	return (
 		<Modal
 			visible={visible}

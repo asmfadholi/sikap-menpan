@@ -40,8 +40,8 @@ export default [
 		icon: SafetyCertificateOutlined,
 	},
 	{
-		name: "Setting",
-		key: "/setting",
+		name: "Settings",
+		key: "/settings",
 		icon: SettingOutlined,
 	},
 ];

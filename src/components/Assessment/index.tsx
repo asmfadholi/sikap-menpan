@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 // hooks
 // hooks
-import { useActivity } from "hooks/useActivity";
+import { useActivityByRole } from "hooks/useActivityByRole";
 
 // connfiguration
 import tableConfig from "./tableConfig";
@@ -14,13 +14,13 @@ import tableConfig from "./tableConfig";
 const CreationModal = dynamic(import("./components/CreationModal"));
 
 const TableDashboard = () => {
-	const init = { status: "Ditugaskan", page: 1, limit: 10 };
+	const init = { status: "Finished", page: 1, limit: 10 };
 	const {
 		loading,
 		data: responseData,
 		handleFilter,
 		params,
-	} = useActivity(init);
+	} = useActivityByRole(init);
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
@@ -35,8 +35,7 @@ const TableDashboard = () => {
 	});
 
 	const handleOnChange = (val) => {
-		const { current: page, pageSize: limit } = val;
-		handleFilter({ ...params, page, limit });
+		handleFilter({ search: val, page: 1, limit: 10 });
 	};
 
 	const propsDataTable = {

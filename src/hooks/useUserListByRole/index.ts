@@ -26,13 +26,18 @@ const handleError = (currentResponse) => {
 	}
 };
 
-const URL = "/user/list";
+const URL = "/user/list_by_role";
 const defaultParams = { page: 1, limit: 500, search: "" };
 const initResponseData = { success: false, message: "", data: [] };
+const getRoleId = () => localStorage.getItem("roleId");
 
-const useUserList = (init = {}) => {
+const useUserListByRole = (init = {}) => {
 	const [loading, setLoading] = useState<boolean>(true);
-	const [params, setParams] = useState({ ...defaultParams, ...init });
+	const [params, setParams] = useState({
+		...defaultParams,
+		...init,
+		role: getRoleId(),
+	});
 	const [responseData, setResponseData] = useState(initResponseData);
 
 	const getData = useCallback(async (params) => {
@@ -81,4 +86,4 @@ const useUserList = (init = {}) => {
 	}; // will return { page, limit, search, list, success, loading, refetch, errors }
 };
 
-export { useUserList };
+export { useUserListByRole };

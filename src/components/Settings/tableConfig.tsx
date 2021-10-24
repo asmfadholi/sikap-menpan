@@ -1,8 +1,6 @@
 import React from "react";
 
 import ActionCol from "./components/ActionCol";
-import ProtocolerCol from "./components/ProtocolerCol";
-import TableColumns from "../TableColumns";
 
 const tableConfig = ({
 	data,
@@ -23,14 +21,20 @@ const tableConfig = ({
 	};
 
 	const columns = [
-		...TableColumns({ status: false }),
 		{
-			title: "Protokoler",
-			dataIndex: "protokoler",
-			key: "protokoler",
-			render: (_, row) => <ProtocolerCol row={row} />,
+			title: "Nama",
+			dataIndex: "userName",
+			key: "userName",
 		},
-
+		{
+			title: "Email",
+			dataIndex: "userEmail",
+			key: "userEmail",
+		},
+		{
+			title: "No. Handphone",
+			dataIndex: "userPhone",
+		},
 		{
 			title: "",
 			dataIndex: "action",
@@ -50,7 +54,7 @@ const tableConfig = ({
 	return {
 		pagination,
 		columns,
-		rowKey: "id",
+		rowKey: "activityId",
 		scroll: { x: "max-content" },
 		sticky: true,
 	};

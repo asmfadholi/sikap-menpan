@@ -10,7 +10,7 @@ const normalizeResponse = (res) => {
 	return { success, message };
 };
 
-const URL = "/activities/add_submit";
+const URL = "/Penilaian/review_submit";
 
 const useAssessProtocol = () => {
 	const [loading, setLoading] = useState<boolean>(false);

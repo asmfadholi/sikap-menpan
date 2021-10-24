@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 // hooks
 // hooks
-import { useActivityByRole } from "hooks/useActivityByRole";
+import { useActivity } from "hooks/useActivity";
 
 // connfiguration
 import tableConfig from "./tableConfig";
@@ -20,7 +20,7 @@ const TableDashboard = () => {
 		data: responseData,
 		handleFilter,
 		params,
-	} = useActivityByRole(init);
+	} = useActivity(init);
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");

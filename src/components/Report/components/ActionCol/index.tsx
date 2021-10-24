@@ -9,6 +9,7 @@ const ActionCol = ({
 	setVisibleModal,
 	setIsFirstModal,
 }) => {
+	const { report } = row;
 	const handleOnEdit = () => {
 		setMode("edit");
 		setData(row);
@@ -24,6 +25,7 @@ const ActionCol = ({
 				icon={<FileDoneOutlined />}
 				size="small"
 				onClick={handleOnEdit}
+				disabled={report}
 			>
 				Laporan
 			</Button>

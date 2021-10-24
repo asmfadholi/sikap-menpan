@@ -9,6 +9,7 @@ const ActionCol = ({
 	setVisibleModal,
 	setIsFirstModal,
 }) => {
+	const { penilaian } = row;
 	const handleOnEdit = () => {
 		setMode("edit");
 		setData(row);
@@ -23,6 +24,7 @@ const ActionCol = ({
 				icon={<SolutionOutlined />}
 				size="small"
 				ghost
+				disabled={penilaian}
 				onClick={handleOnEdit}
 			>
 				Beri Nilai

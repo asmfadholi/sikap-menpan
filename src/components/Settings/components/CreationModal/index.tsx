@@ -5,7 +5,6 @@ import { ROLE_LIST } from "constants/role";
 
 // hooks
 import { useUserCreate } from "hooks/useUserCreate";
-import { useActivityEdit } from "hooks/useActivityEdit";
 import { useUserEdit } from "hooks/useUserEdit";
 
 // types

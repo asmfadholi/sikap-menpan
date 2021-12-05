@@ -50,7 +50,9 @@ const generateMenu = ({ name, key, icon: Icon }: generateMenuInterface) => {
 
 const validateMenuByRole = () => {
 	const roleId = Number(localStorage.getItem("roleId"));
-	const filterMenu = configMenu.filter(({ roles }) => roles.includes(roleId));
+	const filterMenu = configMenu.filter(({ roles }) =>
+		roles.includes(Number(roleId)),
+	);
 	return filterMenu.map(generateMenu);
 };
 

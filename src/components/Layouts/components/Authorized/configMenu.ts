@@ -10,31 +10,31 @@ import {
 
 export default [
 	{
-		roles: [1, 2],
+		roles: [1, 2, 3, 4, 5, 6, 7],
 		name: "Dashboard",
 		key: "/",
 		icon: AppstoreOutlined,
 	},
 	{
-		roles: [1, 2],
+		roles: [1, 2, 4, 5],
 		name: "Kegiatan",
 		key: "/activity",
 		icon: CalendarOutlined,
 	},
 	{
-		roles: [1, 2],
+		roles: [1, 2, 4, 5],
 		name: "Penugasan",
 		key: "/assignment",
 		icon: ContactsOutlined,
 	},
 	{
-		roles: [1, 3],
+		roles: [1, 2, 3, 7],
 		name: "Lapor",
 		key: "/report",
 		icon: FileOutlined,
 	},
 	{
-		roles: [1, 4, 5, 6],
+		roles: [1, 2, 3, 4, 5, 6, 7],
 		name: "Penilaian",
 		key: "/assessment",
 		icon: FileDoneOutlined,
@@ -46,7 +46,7 @@ export default [
 		icon: SafetyCertificateOutlined,
 	},
 	{
-		roles: [1, 2, 3, 4, 5, 6],
+		roles: [1, 2, 3, 4, 5, 6, 7],
 		name: "Settings",
 		key: "/settings",
 		icon: SettingOutlined,

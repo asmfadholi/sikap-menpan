@@ -28,3 +28,13 @@ export const ROLE_LIST = [
 		label: "Anggota/Peserta",
 	},
 ];
+
+export const ROLES = {
+	SUPER_ADMIN: 1,
+	ADMIN: 2,
+	PROTOCOLAR: 3,
+	KOOR: 4,
+	TU_MENTERI: 5,
+	BIRO: 6,
+	PESERTA: 7,
+};

@@ -49,7 +49,7 @@ const tableConfig = ({
 	return {
 		pagination,
 		columns,
-		rowKey: "id",
+		rowKey: "activityId",
 		scroll: { x: "max-content" },
 		sticky: true,
 	};

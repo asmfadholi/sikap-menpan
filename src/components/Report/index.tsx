@@ -3,21 +3,30 @@ import { Row, Input, Col, Table } from "antd";
 import { TableProps } from "antd/lib/table";
 import dynamic from "next/dynamic";
 // hooks
-import { useActivityByRole } from "hooks/useActivityByRole";
-
+import { useActivityByAdmin } from "hooks/useActivityLaporByAdmin";
+import { useActivityLaporByProtocolar } from "hooks/useActivityLaporByProtocolar";
+import { useActivityLaporByDihadiri } from "hooks/useActivityLaporByDihadiri";
 // connfiguration
 import tableConfig from "./tableConfig";
+import { ROLES } from "constants/role";
+
+const getRole = () => localStorage.getItem("roleId") || 0;
 
 // components
 const CreationModal = dynamic(import("./components/CreationModal"));
 const TableDashboard = () => {
-	const init = { status: "Selesai", page: 1, limit: 10 };
-	const {
-		loading,
-		data: responseData,
-		handleFilter,
-		params,
-	} = useActivityByRole(init);
+	const role = getRole();
+	let useActivity = useActivityByAdmin;
+
+	const isAdmin = role === ROLES.ADMIN || role === ROLES.SUPER_ADMIN;
+	const isProtocolar = role === ROLES.PROTOCOLAR;
+	const isDihadiri = role === ROLES.PESERTA;
+
+	if (isAdmin) useActivity = useActivityByAdmin;
+	if (isProtocolar) useActivity = useActivityLaporByProtocolar;
+	if (isDihadiri) useActivity = useActivityLaporByDihadiri;
+
+	const { data: responseData, params, handleFilter, loading } = useActivity();
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");

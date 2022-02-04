@@ -5,32 +5,34 @@ import {
 	FileDoneOutlined,
 } from "@ant-design/icons";
 
-export const LIST = [
-	{
-		title: "Total Kegiatan ",
-		total: 350,
-		color: "#FBC833",
-		icon: <CalendarOutlined />,
-	},
-	{
-		title: "Kegiatan Selesai",
-		total: 350,
-		color: "#B72C30",
-		icon: <CarryOutOutlined />,
-	},
-	{
-		title: "Total Protokoler ",
-		total: 350,
-		color: "#333333",
-		icon: <SafetyCertificateOutlined />,
-	},
-	{
-		title: "Total Laporan",
-		total: 350,
-		color: "#B72C30",
-		icon: <FileDoneOutlined />,
-	},
-];
+export const LIST = ({ allActivity, doneActivity, protocolar, report }) => {
+	return [
+		{
+			title: "Total Kegiatan ",
+			total: allActivity,
+			color: "#FBC833",
+			icon: <CalendarOutlined />,
+		},
+		{
+			title: "Kegiatan Selesai",
+			total: doneActivity,
+			color: "#B72C30",
+			icon: <CarryOutOutlined />,
+		},
+		{
+			title: "Total Protokoler ",
+			total: protocolar,
+			color: "#333333",
+			icon: <SafetyCertificateOutlined />,
+		},
+		{
+			title: "Total Laporan",
+			total: report,
+			color: "#B72C30",
+			icon: <FileDoneOutlined />,
+		},
+	];
+};
 
 export const CHART_DATA = [
 	{

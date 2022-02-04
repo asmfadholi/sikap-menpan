@@ -8,6 +8,7 @@ import {
 	Collapse,
 	message,
 	InputNumber,
+	Empty,
 } from "antd";
 import { useAssessProtocol } from "hooks/useAssessProtocol";
 
@@ -79,47 +80,56 @@ const CreationModal = ({ visible, setVisible, mode, data, refetch }: any) => {
 				initialValues={!isCreate ? sanitizeData(data) : {}}
 				onFinish={handleOnFinish}
 			>
-				<Collapse defaultActiveKey={[]}>
-					{Protocolers.map((protocol, idx) => {
-						const { userName = "", userId } = protocol;
-						return (
-							<Panel
-								header={`Protokoler ${idx + 1} (${userName})`}
-								key={userId}
-							>
-								<Form.Item
-									label="Penilaian"
-									rules={[required]}
-									name={`reviewRate${userId}`}
+				{!Protocolers.length && (
+					<Empty description="Anggota protokoler tidak ditemukan" />
+				)}
+				{Boolean(Protocolers.length) && (
+					<Collapse defaultActiveKey={[]}>
+						{Protocolers.map((protocol, idx) => {
+							const { userName = "", userId } = protocol;
+							return (
+								<Panel
+									header={`Protokoler ${
+										idx + 1
+									} (${userName})`}
+									key={userId}
 								>
-									<InputNumber
-										style={{ width: "100%" }}
-										placeholder="Masukkan nilai dari 1-10"
-									/>
-								</Form.Item>
-								<Form.Item
-									label="Catatan"
-									name={`reviewDescription${userId}`}
-								>
-									<Input.TextArea placeholder="Masukkan catatan" />
-								</Form.Item>
-							</Panel>
-						);
-					})}
-				</Collapse>
+									<Form.Item
+										label="Penilaian"
+										rules={[required]}
+										name={`reviewRate${userId}`}
+									>
+										<InputNumber
+											style={{ width: "100%" }}
+											placeholder="Masukkan nilai dari 1-10"
+										/>
+									</Form.Item>
+									<Form.Item
+										label="Catatan"
+										name={`reviewDescription${userId}`}
+									>
+										<Input.TextArea placeholder="Masukkan catatan" />
+									</Form.Item>
+								</Panel>
+							);
+						})}
+					</Collapse>
+				)}
 
 				<br />
 
 				<Form.Item noStyle shouldUpdate>
 					{() => {
 						return (
-							<Button
-								type="primary"
-								htmlType="submit"
-								style={{ width: "100%" }}
-							>
-								Simpan
-							</Button>
+							Boolean(Protocolers.length) && (
+								<Button
+									type="primary"
+									htmlType="submit"
+									style={{ width: "100%" }}
+								>
+									Simpan
+								</Button>
+							)
 						);
 					}}
 				</Form.Item>

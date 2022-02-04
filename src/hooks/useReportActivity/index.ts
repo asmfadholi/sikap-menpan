@@ -5,7 +5,7 @@ import { fetcher, POST } from "helpers/fetcher";
 const normalizeResponse = (res) => {
 	const { success, message } = res;
 	if (!success) {
-		messageNotif.error(message);
+		messageNotif.error(message || "Oops, gagal submit laporan");
 	}
 	return { success, message };
 };

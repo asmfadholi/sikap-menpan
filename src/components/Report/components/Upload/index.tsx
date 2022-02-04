@@ -46,6 +46,7 @@ const UploadImage = ({ onChange }) => {
 			<Upload
 				listType="picture-card"
 				fileList={fileList}
+				beforeUpload={() => false}
 				onPreview={handlePreview}
 				onChange={handleChange}
 			>

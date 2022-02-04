@@ -8,6 +8,7 @@ import {
 	message,
 	Input,
 	Typography,
+	Upload,
 } from "antd";
 import {
 	FilterOutlined,
@@ -15,6 +16,9 @@ import {
 	SyncOutlined,
 } from "@ant-design/icons";
 import { TableProps } from "antd/lib/table";
+import { useAddActivityByCSV } from "hooks/useAddActivityByCSV";
+import { useDownloadFormatCsv } from "hooks/useDownloadFormatCsv";
+
 import dynamic from "next/dynamic";
 
 // hooks
@@ -33,6 +37,8 @@ const TableDashboard = () => {
 		handleFilter,
 		params,
 	} = useActivity({ status: "Draft" });
+	const { uploadCsv, loading: loadingCSV } = useAddActivityByCSV();
+	const { downloadCsv, loading: loadingDownloadCsv } = useDownloadFormatCsv();
 	const { activities: dataSource } = responseData;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [mode, setMode] = useState("create");
@@ -71,16 +77,25 @@ const TableDashboard = () => {
 		message.success("Berhasil tarik data sigeta");
 	};
 
-	const handleDownloadTemplate = () => {
-		message.success("Berhasil download template csv");
-	};
-
-	const handleButtonClick = () => {
-		message.success("Berhasil upload csv");
-	};
-
 	const handleOnSearch = (val) => {
 		handleFilter({ search: val, page: 1, limit: 10 });
+	};
+
+	const propsUpload = {
+		name: "uploadFile",
+		accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+		action: (file) => file,
+		showUploadList: false,
+		beforeUpload: () => false,
+		onChange(info) {
+			const { file = null } = info;
+			if (file) {
+				const newFormData = new FormData();
+				newFormData.append("filecsv", file);
+				uploadCsv(newFormData);
+			}
+			return info;
+		},
 	};
 
 	return (
@@ -110,11 +125,13 @@ const TableDashboard = () => {
 							Tarik Data Sigeta
 						</Button>
 						<div>
-							<Button onClick={handleButtonClick}>
-								Upload CSV
-							</Button>
+							<Upload {...propsUpload} disabled={loadingCSV}>
+								<Button>Upload CSV</Button>
+							</Upload>
+
 							<Button
-								onClick={handleDownloadTemplate}
+								loading={loadingDownloadCsv}
+								onClick={downloadCsv}
 								style={{ padding: "0 10px" }}
 							>
 								<DownloadOutlined />

@@ -126,7 +126,7 @@ const TableDashboard = () => {
 						</Button>
 						<div>
 							<Upload {...propsUpload} disabled={loadingCSV}>
-								<Button>Upload CSV</Button>
+								<Button loading={loadingCSV}>Upload CSV</Button>
 							</Upload>
 
 							<Button

@@ -24,7 +24,7 @@ const ActionCol = ({
 				icon={<SolutionOutlined />}
 				size="small"
 				ghost
-				// disabled={penilaian}
+				disabled={penilaian}
 				onClick={handleOnEdit}
 			>
 				Beri Nilai

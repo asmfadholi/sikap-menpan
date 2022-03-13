@@ -13,12 +13,11 @@ const normalizeData = (objData) => {
 		const errMessage = "Oops gagal download csv";
 		errors.push(errMessage);
 		messageNotif.error(errMessage);
-	} else {
-		window.open(data, "_blank");
 	}
 
 	return {
 		data,
+		success,
 		errors,
 	};
 };
@@ -40,6 +39,7 @@ const useDownloadFormatCsv = () => {
 			const csvContent = `data:text/csv;charset=utf-8,${newData}`;
 			const encodedUri = encodeURI(csvContent);
 			window.open(encodedUri);
+			newData = { success: true };
 		} catch (err) {
 			newData = err;
 		} finally {

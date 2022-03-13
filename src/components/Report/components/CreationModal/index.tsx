@@ -36,7 +36,7 @@ const CreationModal = ({ visible, setVisible, mode, data }: any) => {
 		body.append("activityId", activityId);
 		body.append("reportUrl", originFileObj);
 		body.append("reportDescription", catatan);
-		const { success } = reportActivity({ body });
+		const { success } = await reportActivity({ body });
 		if (success) {
 			message.success("Berhasil Melaporkan");
 			handleFilter();

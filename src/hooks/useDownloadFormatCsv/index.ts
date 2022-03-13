@@ -37,6 +37,9 @@ const useDownloadFormatCsv = () => {
 				body: {},
 				params: {},
 			});
+			const csvContent = `data:text/csv;charset=utf-8,${newData}`;
+			const encodedUri = encodeURI(csvContent);
+			window.open(encodedUri);
 		} catch (err) {
 			newData = err;
 		} finally {

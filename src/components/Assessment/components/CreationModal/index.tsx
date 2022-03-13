@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import {
 	Modal,
@@ -10,6 +10,7 @@ import {
 	InputNumber,
 	Empty,
 } from "antd";
+import DetailReportModal from "../DetailReportModal";
 import { useAssessProtocol } from "hooks/useAssessProtocol";
 
 const { Panel } = Collapse;
@@ -32,6 +33,8 @@ const required = {
 
 const CreationModal = ({ visible, setVisible, mode, data, refetch }: any) => {
 	const { Protocolers = [], activityName = "" } = data;
+	const [visibleDetail, setVisibleDetail] = useState(false);
+	const [currentData, setCurrentData] = useState({});
 	const [form] = Form.useForm();
 	const isCreate = mode === "create";
 	const [assessProtocolar] = useAssessProtocol();
@@ -67,74 +70,97 @@ const CreationModal = ({ visible, setVisible, mode, data, refetch }: any) => {
 	};
 
 	return (
-		<Modal
-			visible={visible}
-			title={title}
-			width={600}
-			onCancel={onHandleCancel}
-			footer={null}
-		>
-			<Form
-				form={form}
-				layout="vertical"
-				initialValues={!isCreate ? sanitizeData(data) : {}}
-				onFinish={handleOnFinish}
+		<>
+			{Boolean(visibleDetail) && (
+				<DetailReportModal
+					visible={visibleDetail}
+					data={{ ...currentData, activityId: data.activityId }}
+					setVisible={setVisibleDetail}
+				/>
+			)}
+
+			<Modal
+				visible={visible}
+				title={title}
+				width={600}
+				onCancel={onHandleCancel}
+				footer={null}
 			>
-				{!Protocolers.length && (
-					<Empty description="Anggota protokoler tidak ditemukan" />
-				)}
-				{Boolean(Protocolers.length) && (
-					<Collapse defaultActiveKey={[]}>
-						{Protocolers.map((protocol, idx) => {
-							const { userName = "", userId } = protocol;
+				<Form
+					form={form}
+					layout="vertical"
+					initialValues={!isCreate ? sanitizeData(data) : {}}
+					onFinish={handleOnFinish}
+				>
+					{!Protocolers.length && (
+						<Empty description="Anggota protokoler tidak ditemukan" />
+					)}
+					{Boolean(Protocolers.length) && (
+						<Collapse defaultActiveKey={[Protocolers[0].userId]}>
+							{Protocolers.map((protocol, idx) => {
+								const { userName = "", userId } = protocol;
+							
+								return (
+									<Panel
+										header={`Protokoler ${
+											idx + 1
+										} (${userName})`}
+										key={userId}
+									>
+										<Button
+											type="primary"
+											size="small"
+											onClick={() => {
+												setCurrentData(protocol);
+												setVisibleDetail(true);
+											}}
+										>
+											Detail Laporan
+										</Button>
+										<br />
+										<br />
+										<Form.Item
+											label="Penilaian"
+											rules={[required]}
+											name={`reviewRate${userId}`}
+										>
+											<InputNumber
+												style={{ width: "100%" }}
+												placeholder="Masukkan nilai dari 1-10"
+											/>
+										</Form.Item>
+										<Form.Item
+											label="Catatan"
+											name={`reviewDescription${userId}`}
+										>
+											<Input.TextArea placeholder="Masukkan catatan" />
+										</Form.Item>
+									</Panel>
+								);
+							})}
+						</Collapse>
+					)}
+
+					<br />
+
+					<Form.Item noStyle shouldUpdate>
+						{() => {
 							return (
-								<Panel
-									header={`Protokoler ${
-										idx + 1
-									} (${userName})`}
-									key={userId}
-								>
-									<Form.Item
-										label="Penilaian"
-										rules={[required]}
-										name={`reviewRate${userId}`}
+								Boolean(Protocolers.length) && (
+									<Button
+										type="primary"
+										htmlType="submit"
+										style={{ width: "100%" }}
 									>
-										<InputNumber
-											style={{ width: "100%" }}
-											placeholder="Masukkan nilai dari 1-10"
-										/>
-									</Form.Item>
-									<Form.Item
-										label="Catatan"
-										name={`reviewDescription${userId}`}
-									>
-										<Input.TextArea placeholder="Masukkan catatan" />
-									</Form.Item>
-								</Panel>
+										Simpan
+									</Button>
+								)
 							);
-						})}
-					</Collapse>
-				)}
-
-				<br />
-
-				<Form.Item noStyle shouldUpdate>
-					{() => {
-						return (
-							Boolean(Protocolers.length) && (
-								<Button
-									type="primary"
-									htmlType="submit"
-									style={{ width: "100%" }}
-								>
-									Simpan
-								</Button>
-							)
-						);
-					}}
-				</Form.Item>
-			</Form>
-		</Modal>
+						}}
+					</Form.Item>
+				</Form>
+			</Modal>
+		</>
 	);
 };
 

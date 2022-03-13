@@ -50,7 +50,7 @@ const CreationModal = ({ visible, setVisible, mode, data }: any) => {
 	};
 
 	const handleOnChangeUpload = () => {
-		console.log("uploade");
+		console.log("uplaodes");
 	};
 
 	return (

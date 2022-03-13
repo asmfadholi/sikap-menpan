@@ -99,7 +99,6 @@ const CreationModal = ({ visible, setVisible, mode, data, refetch }: any) => {
 						<Collapse defaultActiveKey={[Protocolers[0].userId]}>
 							{Protocolers.map((protocol, idx) => {
 								const { userName = "", userId } = protocol;
-							
 								return (
 									<Panel
 										header={`Protokoler ${
